@@ -5,6 +5,7 @@ public class Quest {
     private String questCategory;
     private String questName;
     private String questDescription;
+    private Integer questReward;
 
     public void setQuestCategory(String questCategory) {
         this.questCategory = questCategory;
@@ -36,5 +37,13 @@ public class Quest {
 
     public String getQuestDescription() {
         return questDescription;
+    }
+
+    public Integer getQuestReward() {
+        return questReward;
+    }
+
+    public void setQuestReward(Integer questReward) {
+        this.questReward = questReward;
     }
 }
