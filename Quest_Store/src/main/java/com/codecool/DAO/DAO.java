@@ -1,4 +1,6 @@
 package main.java.com.codecool.DAO;
 
-public class DAO {
+public abstract class DAO {
+
+
 }
