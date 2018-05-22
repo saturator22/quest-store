@@ -69,8 +69,29 @@ public class MentorDAO implements DAO {
         return false;
     }
 
-    public boolean updateQuest(Integer questId){
-        
+    public boolean updateQuest(Quest quest){
+        String query = "UPDATE quests SET quest_category=?, quest_name=?, reward=? " +
+                "WHERE user_id=" + quest.getQuestId();
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, quest.getQuestCategory());
+            ps.setString(2, quest.getQuestName());
+            ps.setInt(3, quest.getQuestReward());
+
+            int i = ps.executeUpdate();
+
+            ps.close();
+            connection.close();
+
+            if(i == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
     }
 
 
