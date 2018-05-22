@@ -20,7 +20,7 @@ public abstract class DAO {
                      "SET role_id = ?, first_name = ?, last_name = ?, login = ?, password = ?, email = ?" +
                      "WHERE user_id = ?";
 
-    public boolean addUserData(User user) {
+    public static boolean addUserData(User user) {
         try {
             Connection c = ConnectionBuilder.getConnection();
             PreparedStatement prst = c.prepareStatement(INSERT);
@@ -51,6 +51,5 @@ public abstract class DAO {
             e.printStackTrace();
         }
         return false;
-    }
     }
 }
