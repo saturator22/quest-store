@@ -11,8 +11,8 @@ public class MentorDAO implements DAO {
     public boolean addStudent(Student student) {
         String query = "UPDATE students SET class_id=?, github=?, balance=0, earned_coolcoins=0 " +
                 "WHERE user_id=" + student.getUser_id();
-        
-        add(student);
+
+        addUserData(student);
 
         try {
             Connection connection = ConnectionBuilder.getConnection();
@@ -25,18 +25,23 @@ public class MentorDAO implements DAO {
             ps.close();
             connection.close();
 
+            if(i == 1) {
+                return true;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    public Student getStudent();
+    public Student getStudent(Integer userId);
 
     public boolean UpdateArtifact(Artifact artifact);
 
     public boolean addQuest();
 
-    public boolean updateQuest();
+    public boolean updateQuest(Integer questId);
 
 
 }
