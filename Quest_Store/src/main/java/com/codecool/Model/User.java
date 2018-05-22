@@ -1,27 +1,27 @@
 package com.codecool.Model;
 
-abstract class User {
-    Integer role;
-    String firts_name;
+public abstract class User {
+    Integer role_id;
+    String first_name;
     String last_name;
     String login;
     String email;
     String password;
 
-    public void setRole(Integer role) {
-        role = role;
+    public void setRole_id(Integer role_id) {
+        this.role_id = role_id;
     }
 
-    public Integer getRole() {
-        return role;
+    public Integer getRole_id() {
+        return role_id;
     }
 
-    public void setFirts_name(String firts_name) {
-        this.firts_name = firts_name;
+    public void setFirst_name(String firts_name) {
+        this.first_name = firts_name;
     }
 
-    public String getFirts_name() {
-        return firts_name;
+    public String getFirst_name() {
+        return first_name;
     }
 
     public String getLast_name() {
