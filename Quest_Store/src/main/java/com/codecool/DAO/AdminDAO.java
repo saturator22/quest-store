@@ -45,7 +45,7 @@ public class AdminDAO extends DAO {
         try {
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, level.getLevelRequiredBalance());
+            ps.setString(1, level.getLevelRequiredBalance().toString());
 
             int intValue = ps.executeUpdate();
             insertSuccessful = executeSuccessful(intValue);
