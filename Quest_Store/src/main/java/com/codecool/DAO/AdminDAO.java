@@ -38,11 +38,6 @@ public class AdminDAO extends DAO {
         return insertSuccessful;
     }
 
-    private boolean executeSuccessful(int intValue) {
-        if (intValue == 1) { return true; }
-        return false;
-    }
-
     public boolean addLevel(Level level) {
         String query = "INSERT INTO Levels (level_req_balance) VALUES (?)";
         boolean insertSuccessful = false;
@@ -65,4 +60,8 @@ public class AdminDAO extends DAO {
         return insertSuccessful;
     }
 
+    private boolean executeSuccessful(int intValue) {
+        if (intValue == 1) { return true; }
+        return false;
+    }
 }
