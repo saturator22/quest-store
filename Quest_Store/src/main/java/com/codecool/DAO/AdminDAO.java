@@ -47,6 +47,22 @@ public class AdminDAO extends DAO {
         String query = "INSERT INTO Levels (level_req_balance) VALUES (?)";
         boolean insertSuccessful = false;
 
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, level.getLevelRequiredBalance());
+
+            int intValue = ps.executeUpdate();
+            insertSuccessful = executeSuccessful(intValue);
+
+            ps.close();
+            connection.close();
+
+            if (insertSuccessful) { return true; }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return insertSuccessful;
     }
 
 }
