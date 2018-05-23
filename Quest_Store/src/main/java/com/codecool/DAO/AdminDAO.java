@@ -11,8 +11,7 @@ import java.sql.SQLException;
 public class AdminDAO extends DAO {
 
     public boolean addMentor(Mentor mentor) {
-        boolean isDone = addUserData(mentor);
-        return isDone;
+        return addUserData(mentor);
     }
 
     public boolean addClass(ClassRoom classRoom) {
