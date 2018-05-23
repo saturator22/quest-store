@@ -9,7 +9,7 @@ public class ConnectionBuilder {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/filip",
+                    .getConnection("jdbc:postgresql://localhost:5432/Quest_Store",
                             "filip", "Myczkas91!");
         } catch (Exception e) {
             e.printStackTrace();

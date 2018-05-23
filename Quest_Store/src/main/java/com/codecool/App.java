@@ -14,11 +14,11 @@ public class App
     {
         User mentor = new Mentor();
         mentor.setRole_id(1);
-        mentor.setFirst_name("Bartek");
-        mentor.setLast_name("Petka");
+        mentor.setFirst_name("MILOSZ");
+        mentor.setLast_name("Romanowski");
         mentor.setLogin("bartp");
-        mentor.setPassword("fwfwfw");
-        mentor.setEmail("wfwrfw@wdfwe.com");
+        mentor.setPassword("tarara");
+        mentor.setEmail("wfwrfw@wesd.com");
 
         DAO.addUserData(mentor);
     }
