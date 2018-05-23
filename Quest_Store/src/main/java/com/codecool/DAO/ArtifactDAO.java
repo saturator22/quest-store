@@ -2,17 +2,28 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Artifact;
+import com.codecool.Model.Quest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ArtifactDAO {
-    
+
     public boolean UpdateArtifact(Artifact artifact) {
         String query = "UPDATE artifacts SET name=?, price=?, description=? " +
                 "WHERE artifact_id=?=" + artifact.getArtifactId();
 
+        return sendQuestQuery(artifact, query);
+    }
+
+    public boolean AddArtifact(Artifact artifact) {
+        String query = "INSERT INTO artifacts(name, price, description) VALUES (?, ?, ?)";
+
+        return sendQuestQuery(artifact, query);
+    }
+
+    private boolean sendQuestQuery(Artifact artifact, String query) {
         try {
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement ps = connection.prepareStatement(query);
@@ -32,6 +43,5 @@ public class ArtifactDAO {
             e.printStackTrace();
         }
         return false;
-        }
     }
 }
