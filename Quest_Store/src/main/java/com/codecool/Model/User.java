@@ -6,7 +6,7 @@ public abstract class User {
     String last_name;
     String login;
     String email;
-    String password;
+    Integer password;
 
     public void setRole_id(Integer role_id) {
         this.role_id = role_id;
@@ -48,11 +48,11 @@ public abstract class User {
         this.email = email;
     }
 
-    public String getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword (Integer password) {
         this.password = password;
     }
 }
