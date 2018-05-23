@@ -17,7 +17,7 @@ public class AdminDAO extends DAO {
 
     public boolean addClass(ClassRoom classRoom) {
         String query = "INSERT INTO Classes(name) VALUES(?)";
-        boolean updateSuccessful = false;
+        boolean insertSuccessful = false;
 
         try {
             Connection connection = ConnectionBuilder.getConnection();
@@ -25,17 +25,17 @@ public class AdminDAO extends DAO {
             ps.setString(1, classRoom.getName());
 
             int intValue = ps.executeUpdate();
-            updateSuccessful = executeSuccessful(intValue);
+            insertSuccessful = executeSuccessful(intValue);
 
             ps.close();
             connection.close();
 
-            if (updateSuccessful) { return true; }
+            if (insertSuccessful) { return true; }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return updateSuccessful;
+        return insertSuccessful;
     }
 
     private boolean executeSuccessful(int intValue) {
@@ -46,7 +46,7 @@ public class AdminDAO extends DAO {
     public boolean addLevel(Level level) {
         String query = "INSERT INTO Levels (level_req_balance) VALUES (?)";
         boolean insertSuccessful = false;
-        
+
     }
 
 }
