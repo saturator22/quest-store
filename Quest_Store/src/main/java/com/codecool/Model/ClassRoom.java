@@ -1,6 +1,6 @@
 package com.codecool.Model;
 
-public class Class {
+public class ClassRoom {
     private Integer classId;
     private String name;
 

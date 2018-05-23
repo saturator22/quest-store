@@ -1,6 +1,7 @@
 package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
+import com.codecool.Model.ClassRoom;
 import com.codecool.Model.Mentor;
 
 import java.sql.Connection;
