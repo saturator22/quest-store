@@ -20,10 +20,12 @@ public class Quest {
     }
 
     public Integer getQuestId() {
+
         return questId;
     }
 
     public void setQuestName(String questName) {
+
         this.questName = questName;
     }
 
