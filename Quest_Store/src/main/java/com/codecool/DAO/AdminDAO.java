@@ -2,6 +2,7 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.ClassRoom;
+import com.codecool.Model.Level;
 import com.codecool.Model.Mentor;
 
 import java.sql.Connection;
@@ -40,6 +41,12 @@ public class AdminDAO extends DAO {
     private boolean updateQuerySuccessful(int intValue) {
         if (intValue == 1) { return true; }
         return false;
+    }
+
+    public boolean addLevel(Level level) {
+        String query = "INSERT INTO Levels (level_req_balance) VALUES (?)";
+        boolean updateSuccessful = false;
+        
     }
 
 }
