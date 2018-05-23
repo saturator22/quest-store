@@ -29,4 +29,12 @@ public class Artifact {
     public String getDescription() {
         return description;
     }
+
+    public Integer getArtifactId() {
+        return artifactId;
+    }
+
+    public void setArtifactId(Integer artifactId) {
+        this.artifactId = artifactId;
+    }
 }
