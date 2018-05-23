@@ -36,12 +36,14 @@ public class QuestDAO {
 
     public boolean addQuest(Quest quest) {
         String query = "INSERT INTO quests(quest_category, quest_name, reward) VALUES (?, ?, ?)";
-        sendQuestQuery(query, quest);
+
+        return sendQuestQuery(query, quest);
     }
 
     public boolean updateQuest(Quest quest) {
         String query = "UPDATE quests SET quest_category=?, quest_name=?, reward=? " +
                 "WHERE user_id=" + quest.getQuestId();
-        sendQuestQuery(query, quest);
+
+        return sendQuestQuery(query, quest);
     }
 }
