@@ -25,7 +25,7 @@ public class AdminDAO extends DAO {
             ps.setString(1, classRoom.getName());
 
             int intValue = ps.executeUpdate();
-            updateSuccessful = updateQuerySuccessful(intValue);
+            updateSuccessful = executeSuccessful(intValue);
 
             ps.close();
             connection.close();
@@ -38,14 +38,14 @@ public class AdminDAO extends DAO {
         return updateSuccessful;
     }
 
-    private boolean updateQuerySuccessful(int intValue) {
+    private boolean executeSuccessful(int intValue) {
         if (intValue == 1) { return true; }
         return false;
     }
 
     public boolean addLevel(Level level) {
         String query = "INSERT INTO Levels (level_req_balance) VALUES (?)";
-        boolean updateSuccessful = false;
+        boolean insertSuccessful = false;
         
     }
 
