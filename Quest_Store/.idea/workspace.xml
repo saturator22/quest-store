@@ -22,12 +22,29 @@
       <file leaf-file-name="AdminDAO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/DAO/AdminDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="285">
+              <caret line="47" column="72" selection-start-line="47" selection-start-column="72" selection-end-line="47" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#324#325#0" expanded="true" />
                 <element signature="e#376#377#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/Model/Level.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+              <folding>
+                <element signature="e#166#167#0" expanded="true" />
+                <element signature="e#203#204#0" expanded="true" />
+                <element signature="e#243#244#0" expanded="true" />
+                <element signature="e#273#274#0" expanded="true" />
+                <element signature="e#462#463#0" expanded="true" />
+                <element signature="e#505#506#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,6 +119,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/codecool/Model/Class.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/codecool/Model/ClassRoom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/codecool/Model/Level.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/codecool/DAO/AdminDAO.java" />
       </list>
     </option>
@@ -287,7 +305,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
@@ -374,10 +392,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/Model/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding>
+            <element signature="e#166#167#0" expanded="true" />
+            <element signature="e#203#204#0" expanded="true" />
+            <element signature="e#243#244#0" expanded="true" />
+            <element signature="e#273#274#0" expanded="true" />
+            <element signature="e#462#463#0" expanded="true" />
+            <element signature="e#505#506#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/DAO/AdminDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="285">
+          <caret line="47" column="72" selection-start-line="47" selection-start-column="72" selection-end-line="47" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#324#325#0" expanded="true" />
