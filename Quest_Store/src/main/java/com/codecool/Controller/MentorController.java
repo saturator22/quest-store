@@ -42,14 +42,22 @@ public class MentorController implements IUserCreateable {
     }
 
     public void addArtifact() {
-        UserInput userInput = new UserInput();
+
         Artifact artifact = new Artifact();
+        artifact = setArtifactAttributes(artifact);
+
+        ArtifactDAO artifactDAO = new ArtifactDAO();
+        artifactDAO.addArtifact(artifact);
+    }
+
+    private Artifact setArtifactAttributes(Artifact artifact) {
+        UserInput userInput = new UserInput();
 
         artifact.setName(userInput.getString("Enter name: "));
         artifact.setPrice(userInput.getInt("Enter price: "));
         artifact.setDescription(userInput.getString("Enter description: "));
 
-        ArtifactDAO artifactDAO = new ArtifactDAO();
-        artifactDAO.addArtifact(artifact);
+        return artifact;
     }
+
 }
