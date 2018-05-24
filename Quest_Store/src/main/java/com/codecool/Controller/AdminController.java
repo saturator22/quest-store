@@ -37,8 +37,8 @@ public class AdminController implements IUserCreateable {
         ClassRoom classRoom = new ClassRoom();
         classRoom.setName(userInput.getString("Enter class name: "));
 
-        ClassRoomDAO classRoomDAO = new ClassRoomDAO();
-        classRoomDAO.addClassRoom(classRoom);
+        AdminDAO adminDAO = new AdminDAO();
+        adminDAO.addClass(classRoom);
     }
 
     public void addLevel() {
