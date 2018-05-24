@@ -6,6 +6,15 @@ public class Quest {
     private String questName;
     private String questDescription;
     private Integer questReward;
+    private Integer questOwnerId;
+
+    public void setQuestOwnerId(Integer ownerId) {
+        this.questOwnerId = ownerId;
+    }
+
+    public Integer getQuestOwnerId() {
+        return questOwnerId;
+    }
 
     public void setQuestCategory(String questCategory) {
         this.questCategory = questCategory;
