@@ -74,7 +74,7 @@ public class QuestDAO {
     }
 
     public boolean addQuest(Quest quest) {
-        String query = "INSERT INTO quests(quest_category, quest_name, reward) VALUES (?, ?, ?)";
+        String query = "INSERT INTO quests(quest_category, quest_name, quest_reward) VALUES (?, ?, ?)";
 
         return sendQuestQuery(query, quest);
     }
