@@ -1,18 +1,31 @@
 package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
-import com.codecool.Model.ClassRoom;
-import com.codecool.Model.Level;
-import com.codecool.Model.Mentor;
+import com.codecool.Model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminDAO extends DAO {
 
     public boolean addMentor(Mentor mentor) {
         return addUserData(mentor);
+    }
+
+    Admin extractUserFromRow(ResultSet resultSet) throws SQLException{
+        Admin admin = new Admin();
+
+        admin.setUserId(resultSet.getInt("user_id"));
+        admin.setRoleId(resultSet.getInt("role_id"));
+        admin.setFirstName(resultSet.getString("first_name"));
+        admin.setLastName(resultSet.getString("last_name"));
+        admin.setLogin(resultSet.getString("login"));
+        admin.setPassword(resultSet.getInt("password"));
+        admin.setEmail(resultSet.getString("email"));
+
+        return admin;
     }
 
     public boolean addClass(ClassRoom classRoom) {
@@ -39,7 +52,7 @@ public class AdminDAO extends DAO {
     }
 
     public boolean addLevel(Level level) {
-        String query = "INSERT INTO Levels (level_req_balance) VALUES (?)";
+        String query = "INSERT INTO levels (level_req_balance) VALUES (?)";
         boolean insertSuccessful = false;
 
         try {
