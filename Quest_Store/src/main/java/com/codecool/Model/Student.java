@@ -1,13 +1,12 @@
 package com.codecool.Model;
 
-public class Student {
+public class Student extends User{
 
-    Integer userId;
-    Integer classId;
-    Integer levelId;
-    String github;
-    Integer balance;
-    Integer earned;
+    private Integer classId;
+    private Integer levelId;
+    private String github;
+    private Integer balance = 0;
+    private Integer earned = 0;
 
     public void setBalance(Integer balance) {
         this.balance = balance;
@@ -49,11 +48,4 @@ public class Student {
         return this.levelId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getUserId() {
-        return this.userId;
-    }
 }

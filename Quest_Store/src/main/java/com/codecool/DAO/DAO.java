@@ -1,7 +1,6 @@
 package com.codecool.DAO;
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.User;
-import org.postgresql.util.PSQLException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,16 +22,16 @@ public abstract class DAO {
                      "SET role_id = ?, first_name = ?, last_name = ?, login = ?, password = ?, email = ?" +
                      "WHERE user_id = ?";
 
-    abstract List<User> extractUserFromRow();
+    abstract User extractUserFromRow(ResultSet resultSet);
 
     public boolean updatePersonalData(User user) {
         try {
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
 
-            preparedStatement.setInt(1, user.getRole_id());
-            preparedStatement.setString(2, user.getFirst_name());
-            preparedStatement.setString(3, user.getLast_name());
+            preparedStatement.setInt(1, user.getRoleId());
+            preparedStatement.setString(2, user.getFirstName());
+            preparedStatement.setString(3, user.getLastName());
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setInt(5, user.getPassword());
             preparedStatement.setString(6, user.getEmail());
@@ -59,16 +58,17 @@ public abstract class DAO {
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT);
 
-            ResultSet rset = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(rset.next()) {
-                listOfUsers.add(extractUserFromRow());
+            while(resultSet.next()) {
+                listOfUsers.add(extractUserFromRow(resultSet));
             }
-
-            return listOfUsers;
 
             connection.close();
             preparedStatement.close();
+
+            return listOfUsers;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,14 +81,14 @@ public abstract class DAO {
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
 
-            preparedStatement.setString(2, user.getFirst_name());
-            preparedStatement.setString(3, user.getLast_name());
+            preparedStatement.setString(2, user.getFirstName());
+            preparedStatement.setString(3, user.getLastName());
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setInt(6, user.getPassword());
 
-            if(user.getRole_id() != null) {
-                preparedStatement.setInt(1, user.getRole_id());
+            if(user.getRoleId() != null) {
+                preparedStatement.setInt(1, user.getRoleId());
             } else {
                 preparedStatement.setNull(1, 0);
             }

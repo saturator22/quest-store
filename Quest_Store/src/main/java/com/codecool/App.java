@@ -13,9 +13,9 @@ public class App
     public static void main( String[] args )
     {
         User mentor = new Mentor();
-        mentor.setRole_id(1);
-        mentor.setFirst_name("MILOSZ");
-        mentor.setLast_name("Romanowski");
+        mentor.setRoleId(1);
+        mentor.setFirstName("MILOSZ");
+        mentor.setLastName("Romanowski");
         mentor.setLogin("bartp");
         mentor.setPassword("tarara");
         mentor.setEmail("wfwrfw@wesd.com");
