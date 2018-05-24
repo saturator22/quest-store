@@ -5,7 +5,7 @@ import com.codecool.input.UserInput;
 
 public interface IUserCreateable {
 
-    default User setUserAttibutes(User user) {
+    default User setUserAttributes(User user) {
         UserInput userInput = new UserInput();
         user.setFirstName(userInput.getString("Enter first name: "));
         user.setLastName(userInput.getString("Enter last name: "));

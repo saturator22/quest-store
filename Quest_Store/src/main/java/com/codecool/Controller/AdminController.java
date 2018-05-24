@@ -15,7 +15,7 @@ public class AdminController implements IUserCreateable {
     public void addMentor() {
         UserInput userInput = new UserInput();
         User mentor = new Mentor();
-        mentor = setUserAttibutes(mentor);
+        mentor = setUserAttributes(mentor);
         mentor.setRoleId(MENTOR_ROLE);
 
         mentor = (Mentor) mentor;
