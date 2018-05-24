@@ -20,7 +20,7 @@ public class AdminController implements IUserCreateable {
 
         mentor = (Mentor) mentor;
         MentorDAO mentorDAO = new MentorDAO();
-        mentorDAO.addMentor(mentor);
+        mentorDAO.insertMentorData(mentor);
     }
 
     public void viewMentorAccount() {
