@@ -50,6 +50,16 @@ public class MentorController implements IUserCreateable {
         artifactDAO.addArtifact(artifact);
     }
 
+    public void updateArtifact() {
+        UserInput userInput = new UserInput();
+        ArtifactDAO artifactDAO = new ArtifactDAO();
+
+        Artifact artifact = artifactDAO.getArtifactById(userInput.getInt("Enter id: "));
+        artifact = setArtifactAttributes(artifact);
+
+        artifactDAO.updateArtifact(artifact);
+    }
+
     private Artifact setArtifactAttributes(Artifact artifact) {
         UserInput userInput = new UserInput();
 
@@ -59,5 +69,7 @@ public class MentorController implements IUserCreateable {
 
         return artifact;
     }
+
+
 
 }
