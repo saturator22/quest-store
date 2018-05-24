@@ -10,14 +10,38 @@ import java.util.List;
 
 public class ArtifactDAO {
 
-    public boolean UpdateArtifact(Artifact artifact) {
+    public Artifact getArtifactById(Integer artifactId) {
+        String query = "SELECT * FROM artifacts WHERE artifact_id =" + artifactId;
+        Artifact artifact = null;
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                artifact = extractArtifact(resultSet);
+            }
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return artifact;
+    }
+
+    public boolean updateArtifact(Artifact artifact) {
         String query = "UPDATE artifacts SET name=?, price=?, description=? " +
                 "WHERE artifact_id=?=" + artifact.getArtifactId();
 
         return sendQuestQuery(artifact, query);
     }
 
-    public boolean AddArtifact(Artifact artifact) {
+    public boolean addArtifact(Artifact artifact) {
         String query = "INSERT INTO artifacts(name, price, description) VALUES (?, ?, ?)";
 
         return sendQuestQuery(artifact, query);
@@ -30,7 +54,7 @@ public class ArtifactDAO {
         artifact.setDescription(resultSet.getString("description"));
         artifact.setName(resultSet.getString("name"));
         artifact.setPrice(resultSet.getInt("price"));
-        artifact.setOwner_id(resultSet.getInt("user_id"));
+//        artifact.setOwner_id(resultSet.getInt("user_id"));
 
         return artifact;
     }
