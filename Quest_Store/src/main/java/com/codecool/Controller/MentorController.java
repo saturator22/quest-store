@@ -41,6 +41,17 @@ public class MentorController implements IUserCreateable {
         questDAO.addQuest(quest);
     }
 
+    
+    public void setQuestCategory() {
+        UserInput userInput = new UserInput();
+        QuestDAO questDAO = new QuestDAO();
+
+        Quest quest = questDAO.getQuestByQuestId(userInput.getInt("Enter id: "));
+        quest.setQuestCategory(userInput.getString("Enter new category: "));
+
+        questDAO.updateQuest(quest);
+    }
+
     public void addArtifact() {
 
         Artifact artifact = new Artifact();
