@@ -12,19 +12,11 @@ import java.util.List;
 
 public class StudentDAO {
 
-    private static final String
-            INSERT_QUERY = "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
-            "VALUES (?, ?, ?, ?, ?, ?)\n" +
-            "ON CONFLICT DO NOTHING;";
-    private static final String
+   private static final String
             SELECT_QUERY = "SELECT class_name, level_id, github, balance, earned_coolcoins\n" +
             "FROM students\n" +
             "JOIN classes\n" +
             "ON students.class_id = classes.class_id;\n";
-    private static final String
-            UPDATE_QUERY = "UPDATE students\n" +
-            "SET class_id = ?, github = ?, balance = ?, earned_coolcoins = ?" +
-            "WHERE user_id = ?";
 
     public List<Student> getStudents() {
         try {
