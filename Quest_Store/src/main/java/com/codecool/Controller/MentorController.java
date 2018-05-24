@@ -41,7 +41,6 @@ public class MentorController implements IUserCreateable {
         questDAO.addQuest(quest);
     }
 
-
     public void setQuestCategory() {
         UserInput userInput = new UserInput();
         QuestDAO questDAO = new QuestDAO();
@@ -80,7 +79,4 @@ public class MentorController implements IUserCreateable {
 
         return artifact;
     }
-
-
-
 }
