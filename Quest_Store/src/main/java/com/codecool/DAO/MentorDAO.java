@@ -1,98 +1,29 @@
 package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
-import com.codecool.Model.Quest;
+import com.codecool.Model.Mentor;
+import com.codecool.Model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MentorDAO implements DAO {
+public class MentorDAO extends DAO {
 
-    public boolean addStudent(Student student) {
-        String query = "UPDATE students SET class_id=?, github=?, balance=0, earned_coolcoins=0 " +
-                "WHERE user_id=" + student.getUser_id();
 
-        addUserData(student);
+    private Mentor extractMentor (ResultSet resultSet) throws SQLException {
+        Mentor mentor = new Mentor();
 
-        try {
-            Connection connection = ConnectionBuilder.getConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, student.getClassId());
-            ps.setString(2, student.getGithub());
+        mentor.setUserId(resultSet.getInt("user_id"));
+        mentor.setFirstName(resultSet.getString("first_name"));
+        mentor.setLastName(resultSet.getString("last_name"));
+        mentor.setEmail(resultSet.getString("email"));
+        mentor.setRoleId(resultSet.getInt("role_id"));
+        mentor.setLogin(resultSet.getString("login"));
 
-            int i = ps.executeUpdate();
-
-            ps.close();
-            connection.close();
-
-            if(i == 1) {
-                return true;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return mentor;
     }
 
-    public Student getStudent(Integer userId) {
-        // not necessary
+    public User extractUserFromRow(ResultSet resultSet) throws SQLException {
+        return extractMentor(resultSet);
     }
-
-    public boolean UpdateArtifact(Artifact artifact) {
-
-    }
-
-    public boolean addQuest(Quest quest) {
-        String query = "INSERT INTO quests(quest_category, quest_name, reward) VALUES (?, ?, ?)";
-
-        try {
-            Connection connection = ConnectionBuilder.getConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, quest.getQuestCategory());
-            ps.setString(2, quest.getQuestName());
-            ps.setInt(3, quest.getQuestReward());
-
-            int i = ps.executeUpdate();
-
-            ps.close();
-            connection.close();
-
-            if (i == 1) {
-                return true;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean updateQuest(Quest quest){
-        String query = "UPDATE quests SET quest_category=?, quest_name=?, reward=? " +
-                "WHERE user_id=" + quest.getQuestId();
-        try {
-            Connection connection = ConnectionBuilder.getConnection();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, quest.getQuestCategory());
-            ps.setString(2, quest.getQuestName());
-            ps.setInt(3, quest.getQuestReward());
-
-            int i = ps.executeUpdate();
-
-            ps.close();
-            connection.close();
-
-            if(i == 1) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-
-    }
-
-
 }
