@@ -22,7 +22,12 @@
 # IntelliJ package
 .idea/
 
-quest-store/.idea/
+Quest_Store/.idea/
+Quest_Store/.classpath
+Quest_Store/.priject
+Quest_Store/.settings
+Quest_Store/pom.xml
+
 
 # xml files
 *.xml
