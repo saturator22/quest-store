@@ -60,4 +60,20 @@ public abstract class User {
     public void setPassword (Integer password) {
         this.password = password;
     }
+
+    public String addUserQuery() {
+         String
+                insertQuery = "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
+                "VALUES ( " + getRoleId() + ", " + getFirstName() + ", " + getLastName() + ", " +
+                 getLogin() + ", " + getEmail() + ", " + getPassword() + ")\n" +
+                "ON CONFLICT DO NOTHING;";
+
+         return insertQuery;
+    }
+
+    public String updateUserQuery() {
+        String
+                updateQuery = 
+    }
 }
+
