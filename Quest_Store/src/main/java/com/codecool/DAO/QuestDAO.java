@@ -9,7 +9,7 @@ import java.util.List;
 
 public class QuestDAO {
 
-    public List<Quest> getStudentQuests(String ownerId, String artifactId) {
+    public List<Quest> getStudentQuests(String ownerId) {
         List<Quest> studentQuests = new ArrayList<>();
 
         String query = "SELECT quests.*, students_quests.user_id " +
