@@ -7,6 +7,15 @@ public class Quest {
     private String questDescription;
     private Integer questReward;
     private Integer questOwnerId;
+    private Boolean isUsed = false; /// TODO WAIT FOR APPROVAL;
+
+    public Boolean getUsed() {
+        return isUsed;
+    }
+
+    public void setUsed(Boolean used) {
+        isUsed = used;
+    }
 
     public void setQuestOwnerId(Integer ownerId) {
         this.questOwnerId = ownerId;
