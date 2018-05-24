@@ -3,13 +3,52 @@ package com.codecool.DAO;
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Quest;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestDAO {
-    //TODO mark student's quest as done
 
+    public List<Quest> getStudentQuests(String ownerId, String artifactId) {
+        List<Quest> studentQuests = new ArrayList<>();
+
+        String query = "SELECT quests.*, students_quests.user_id " +
+                "FROM quests JOIN students_quests " +
+                "ON students_quests.quest_id = quests.quest_id " +
+                "JOIN quests ON quests.user_id = students_quests.user_id WHERE students_quests.user_id = " + ownerId;
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                studentQuests.add(extractQuest(resultSet));
+            }
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return studentQuests;
+    }
+
+    private Quest extractQuest(ResultSet resultSet) throws SQLException {
+        Quest quest = new Quest();
+
+        quest.setQuestId(resultSet.getInt("quest_id"));
+        //TODO missing column        quest.setDescription(resultSet.getString("description"));
+        quest.setQuestName(resultSet.getString("quest_name"));
+        quest.setQuestReward(resultSet.getInt("quest_reward"));
+        quest.setQuestCategory(resultSet.getString("quest_category"));
+        quest.setQuestOwnerId(resultSet.getInt("user_id"));
+
+        return quest;
+    }
 
     private boolean sendQuestQuery(String query, Quest quest) {
         try {
