@@ -29,7 +29,7 @@ public class App
                     "7. Mentor: create artifact\n" +
                     "8. Mentor: update artifact\n" +
                     "9. Mentor: add artifact to store\n" +
-                    "10. Mentor: set artifact category\n" +
+                    "10. Mentor: set quest category\n" +
                     "---------------------------------------\n" +
                     "11. Student: see exp lvl" +
                     "12. Student: see account info\n");
@@ -59,6 +59,9 @@ public class App
             } else if (option == 8) {
                 MentorController mentorController = new MentorController();
                 mentorController.updateArtifact();
+            } else if (option == 9) {
+                MentorController mentorController = new MentorController();
+                mentorController.setQuestCategory();
             }
         }
     }
