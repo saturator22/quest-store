@@ -12,5 +12,6 @@ public interface IUserCreateable {
         user.setLogin(userInput.getString("Enter login: "));
         user.setEmail(userInput.getString("Enter email: "));
         user.setPassword(userInput.getInt("Enter password: "));
+        return user;
     }
 }
