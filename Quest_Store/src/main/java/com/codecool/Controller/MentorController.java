@@ -1,7 +1,9 @@
 package com.codecool.Controller;
 
+import com.codecool.DAO.ArtifactDAO;
 import com.codecool.DAO.QuestDAO;
 import com.codecool.DAO.StudentDAO;
+import com.codecool.Model.Artifact;
 import com.codecool.Model.Quest;
 import com.codecool.Model.Student;
 import com.codecool.Model.User;
@@ -37,5 +39,17 @@ public class MentorController implements IUserCreateable {
 
         QuestDAO questDAO = new QuestDAO();
         questDAO.addQuest(quest);
+    }
+
+    public void addArtifact() {
+        UserInput userInput = new UserInput();
+        Artifact artifact = new Artifact();
+
+        artifact.setName(userInput.getString("Enter name: "));
+        artifact.setPrice(userInput.getInt("Enter price: "));
+        artifact.setDescription(userInput.getString("Enter description: "));
+
+        ArtifactDAO artifactDAO = new ArtifactDAO();
+        artifactDAO.addArtifact(artifact);
     }
 }
