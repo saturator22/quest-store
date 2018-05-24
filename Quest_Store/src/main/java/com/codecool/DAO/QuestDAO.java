@@ -110,6 +110,29 @@ public class QuestDAO {
         return sendQuestQuery(query, quest);
     }
 
+    public boolean addQuestToStudent(Quest quest, Integer user_id) {
+        String query = "INSERT INTO students_quests(user_id, quest_id, is_completed) VALUES (?, ?, ?)";
 
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, user_id);
+            ps.setInt(2, quest.getQuestId());
+            ps.setBoolean(3, false);
+
+            int i = ps.executeUpdate();
+
+            ps.close();
+            connection.close();
+
+            if (i == 1) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
