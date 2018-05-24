@@ -1,5 +1,6 @@
 package com.codecool.Controller;
 
+import com.codecool.DAO.AdminDAO;
 import com.codecool.Model.ClassRoom;
 import com.codecool.Model.Mentor;
 import com.codecool.Model.User;
@@ -37,6 +38,12 @@ public class AdminController implements IUserCreateable {
 
         ClassRoomDAO classRoomDAO = new ClassRoomDAO();
         classRoomDAO.addClassRoom(classRoom);
+    }
+
+    public void addLevel() {
+        UserInput userInput = new UserInput();
+        AdminDAO adminDAO = new AdminDAO();
+        adminDAO.addLevel(userInput.getInt("Enter level required balance: "));
     }
 
 }
