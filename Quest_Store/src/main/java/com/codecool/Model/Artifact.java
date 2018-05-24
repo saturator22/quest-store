@@ -5,6 +5,7 @@ public class Artifact {
     private String name;
     private Integer price;
     private String description;
+    private Integer owner_id;
 
     public void setName(String name) {
         this.name = name;
@@ -36,5 +37,13 @@ public class Artifact {
 
     public void setArtifactId(Integer artifactId) {
         this.artifactId = artifactId;
+    }
+
+    public void setOwner_id(Integer student_id) {
+        this.owner_id = student_id;
+    }
+
+    public Integer getOwner_id() {
+        return owner_id;
     }
 }
