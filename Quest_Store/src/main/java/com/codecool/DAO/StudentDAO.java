@@ -2,6 +2,7 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Student;
+import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +14,11 @@ import java.util.List;
 public class StudentDAO {
 
    private static final String
-            SELECT_QUERY = "SELECT class_name, level_id, github, balance, earned_coolcoins\n" +
+            SELECT_QUERY = "SELECT users.user_id, role_id, first_name, last_name, " +
+            "login, email, class_id, level_id, github, balance, earned_coolcoins\n" +
             "FROM students\n" +
-            "JOIN classes\n" +
-            "ON students.class_id = classes.class_id;\n";
+            "JOIN users\n" +
+            "ON users.user_id = students.user_id;";
 
     public List<Student> getStudents() {
         try {
@@ -48,7 +50,6 @@ public class StudentDAO {
         student.setFirstName(resultSet.getString("first_name"));
         student.setLastName(resultSet.getString("last_name"));
         student.setLogin(resultSet.getString("login"));
-        student.setPassword(resultSet.getInt("password"));
         student.setEmail(resultSet.getString("email"));
         student.setClassId(resultSet.getInt("class_id"));
         student.setLevelId(resultSet.getInt("level_id"));

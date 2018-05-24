@@ -50,10 +50,16 @@ public class Student extends User{
 
     public String insertStudentQuery() {
         String
-                insertQuery = "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
-                "VALUES ((SELECT user_id FROM users WHERE login = " + getLogin() + "), " + getClassId() + ", " + getLevelId() +
-                ", " + getGithub() + ", " + getBalance() + ", " + getEarned() + ")\n" +
-                "ON CONFLICT DO NOTHING;";
+                insertQuery =
+//                "RELEASE savepoint;" +
+//                "SAVEPOINT savepoint;" +
+                "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
+                "VALUES ((SELECT user_id FROM users WHERE login = '" + getLogin() + "'), " + getClassId() + ", " + getLevelId() +
+                ", '" + getGithub() + "', " + getBalance() + ", " + getEarned() + ");\n";
+//                "ON CONFLICT DO NOTHING;" +
+//                "ROLLBACK TO savepoint;" +
+//                "RELEASE SAVEPOINT savepoint;" +
+//                "COMMIT;";
         return  insertQuery;
     }
 

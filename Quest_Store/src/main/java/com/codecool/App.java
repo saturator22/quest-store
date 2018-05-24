@@ -1,25 +1,33 @@
 package com.codecool;
 
 import com.codecool.DAO.DAO;
+import com.codecool.DAO.StudentDAO;
 import com.codecool.Model.Mentor;
+import com.codecool.Model.Student;
 import com.codecool.Model.User;
 
-/**
- * Hello world!
- *
- */
+import java.util.List;
 public class App 
 {
     public static void main( String[] args )
     {
-        User mentor = new Mentor();
-        mentor.setRoleId(1);
-        mentor.setFirstName("MILOSZ");
-        mentor.setLastName("Romanowski");
-        mentor.setLogin("bartp");
-        mentor.setPassword("tarara");
-        mentor.setEmail("wfwrfw@wesd.com");
+        StudentDAO studentDAO = new StudentDAO();
+        Student student = new Student();
+        student.setRoleId(1);
+        student.setFirstName("MILOSZ");
+        student.setLastName("Romanowski");
+        student.setLogin("bartkp");
+        student.setPassword(123);
+        student.setEmail("wfwrfw@wsrdzd.com");
+        student.setLevelId(1);
+        student.setGithub("fwefwef");
+        student.setClassId(1);
 
-        DAO.addUserData(mentor);
+
+        studentDAO.insertStudentData((Student) student);
+        List<Student> studentsList = studentDAO.getStudents();
+        for(Student stud: studentsList) {
+            System.out.println(stud);
+        }
     }
 }
