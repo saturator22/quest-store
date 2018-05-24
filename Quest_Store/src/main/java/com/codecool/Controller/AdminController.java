@@ -14,11 +14,11 @@ public class AdminController implements IUserCreateable {
 
     public void addMentor() {
         UserInput userInput = new UserInput();
-        User mentor = new Mentor();
-        mentor = setUserAttributes(mentor);
-        mentor.setRoleId(MENTOR_ROLE);
+        User user = new Mentor();
+        user = setUserAttributes(user);
+        user.setRoleId(MENTOR_ROLE);
 
-        mentor = (Mentor) mentor;
+        Mentor mentor = (Mentor) user;
         MentorDAO mentorDAO = new MentorDAO();
         mentorDAO.insertMentorData(mentor);
     }
