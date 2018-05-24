@@ -13,6 +13,10 @@ public abstract class User {
         return this.userId;
     }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public void setRoleId(Integer role_id) {
         this.roleId = role_id;
     }
@@ -61,7 +65,7 @@ public abstract class User {
         this.password = password;
     }
 
-    public String addUserQuery() {
+    public String insertUserQuery() {
          String
                 insertQuery = "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
                 "VALUES ( " + getRoleId() + ", " + getFirstName() + ", " + getLastName() + ", " +

@@ -22,7 +22,7 @@ public abstract class DAO {
                      "SET role_id = ?, first_name = ?, last_name = ?, login = ?, password = ?, email = ?" +
                      "WHERE user_id = ?";
 
-    abstract User extractUserFromRow(ResultSet resultSet);
+    abstract User extractUserFromRow(ResultSet resultSet) throws SQLException;
 
     public boolean updatePersonalData(User user) {
         try {
