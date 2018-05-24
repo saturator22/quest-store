@@ -6,13 +6,7 @@ import com.codecool.input.UserInput;
 
 public class AdminController {
 
-    private User setUserAttibutes(User user) {
-        UserInput userInput = new UserInput();
-        user.setFirstName(userInput.getString("Enter first name: "));
-        user.setLastName(userInput.getString("Enter last name: "));
-        user.setLogin(userInput.getString("Enter login: "));
-        user.setEmail(userInput.getString("Enter email: "));
-        user.setPassword(userInput.getString("Enter password: "));
+
     }
 
 }
