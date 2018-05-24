@@ -4,13 +4,9 @@ import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Mentor;
 import com.codecool.Model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MentorDAO extends DAO {
-
 
     private Mentor extractMentor (ResultSet resultSet) throws SQLException {
         Mentor mentor = new Mentor();
@@ -57,5 +53,32 @@ public class MentorDAO extends DAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Mentor getMentorById(Integer mentorID) {
+        String query = "SELECT user_id, role_id, first_name, last_name, login, email\n" +
+                "FROM users\n" +
+                "WHERE user_id=" + mentorID;
+
+        Mentor mentor = null;
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                mentor = extractMentor(resultSet);
+            }
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mentor;
     }
 }
