@@ -1,5 +1,6 @@
 package com.codecool.Controller;
 
+import com.codecool.Model.ClassRoom;
 import com.codecool.Model.Mentor;
 import com.codecool.Model.User;
 import com.codecool.input.UserInput;
@@ -26,6 +27,16 @@ public class AdminController implements IUserCreateable {
         View view = new View();
         MentorDAO mentorDAO = new MentorDAO();
         view.displayUser(mentorDAO.getMentorById(mentor_id));
+    }
+
+    public void  addClass() {
+        UserInput userInput = new UserInput();
+
+        ClassRoom classRoom = new ClassRoom();
+        classRoom.setName(userInput.getString("Enter class name: "));
+
+        ClassRoomDAO classRoomDAO = new ClassRoomDAO();
+        classRoomDAO.addClassRoom(classRoom);
     }
 
 }
