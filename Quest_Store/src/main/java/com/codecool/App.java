@@ -13,12 +13,12 @@ public class App
     public static void main( String[] args )
     {
         User mentor = new Mentor();
-        mentor.setRole_id(1);
-        mentor.setFirst_name("Bartek");
-        mentor.setLast_name("Petka");
+        mentor.setRoleId(1);
+        mentor.setFirstName("MILOSZ");
+        mentor.setLastName("Romanowski");
         mentor.setLogin("bartp");
-        mentor.setPassword("fwfwfw");
-        mentor.setEmail("wfwrfw@wdfwe.com");
+        mentor.setPassword("tarara");
+        mentor.setEmail("wfwrfw@wesd.com");
 
         DAO.addUserData(mentor);
     }

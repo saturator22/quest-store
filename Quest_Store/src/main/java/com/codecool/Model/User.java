@@ -1,39 +1,44 @@
 package com.codecool.Model;
 
 public abstract class User {
-    Integer role_id;
-    String first_name;
-    String last_name;
-    String login;
-    String email;
-    String password;
+    private Integer userId;
+    private Integer roleId;
+    private String firstName;
+    private String lastName;
+    private String login;
+    private String email;
+    private Integer password;
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public Integer getUserId() {
+        return this.userId;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public void setRoleId(Integer role_id) {
+        this.roleId = role_id;
     }
 
-    public void setFirst_name(String firts_name) {
-        this.first_name = firts_name;
+    public Integer getRoleId() {
+        return this.roleId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getLogin() {
-        return login;
+        return this.login;
     }
 
     public void setLogin(String login) {
@@ -41,18 +46,18 @@ public abstract class User {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getPassword() {
+        return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword (Integer password) {
         this.password = password;
     }
 }
