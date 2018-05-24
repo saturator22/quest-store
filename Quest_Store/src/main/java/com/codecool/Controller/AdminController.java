@@ -7,6 +7,4 @@ import com.codecool.input.UserInput;
 public class AdminController {
 
 
-    }
-
 }
