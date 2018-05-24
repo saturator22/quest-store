@@ -2,11 +2,11 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Artifact;
-import com.codecool.Model.Quest;
+import org.postgresql.util.PSQLException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArtifactDAO {
 
@@ -21,6 +21,18 @@ public class ArtifactDAO {
         String query = "INSERT INTO artifacts(name, price, description) VALUES (?, ?, ?)";
 
         return sendQuestQuery(artifact, query);
+    }
+
+    public Artifact extractArtifact(ResultSet resultSet) throws SQLException {
+        Artifact artifact = new Artifact();
+
+        artifact.setArtifactId(resultSet.getInt("artifact_id"));
+        artifact.setDescription(resultSet.getString("description"));
+        artifact.setName(resultSet.getString("name"));
+        artifact.setPrice(resultSet.getInt("price"));
+        artifact.setOwner_id(resultSet.getInt("user_id"));
+
+        return artifact;
     }
 
     private boolean sendQuestQuery(Artifact artifact, String query) {
@@ -43,5 +55,33 @@ public class ArtifactDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<Artifact> getArtifact(String userId, String artifactId) {
+        List<Artifact> studentArtifacts = new ArrayList<>();
+
+        String query = "SELECT artifacts.*, students_artifacts.user_id " +
+                "FROM artifacts JOIN students_artifacts " +
+                "ON students_artifacts.artifact_id = artifacts.artifact_id " +
+                "JOIN students ON students.user_id = students_artifacts.user_id WHERE students.user_id = " + userId;
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                studentArtifacts.add(extractArtifact(resultSet));
+            }
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            }
+
+            return studentArtifacts;
     }
 }
