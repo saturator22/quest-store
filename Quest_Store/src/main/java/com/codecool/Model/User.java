@@ -13,6 +13,10 @@ public abstract class User {
         return this.userId;
     }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public void setRoleId(Integer role_id) {
         this.roleId = role_id;
     }
@@ -60,4 +64,25 @@ public abstract class User {
     public void setPassword (Integer password) {
         this.password = password;
     }
+
+    public String insertUserQuery() {
+         String
+                insertQuery = "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
+                "VALUES ( " + getRoleId() + ", " + getFirstName() + ", " + getLastName() + ", " +
+                 getLogin() + ", " + getEmail() + ", " + getPassword() + ")\n" +
+                "ON CONFLICT DO NOTHING;";
+
+         return insertQuery;
+    }
+
+    public String updateUserQuery() {
+        String
+                updateQuery = "UPDATE users\n" +
+                "SET role_id = " + getRoleId() + ", first_name = " + getFirstName() + ", last_name = " +
+                getLastName() + ", login = " + getLogin() + ", password = " + getPassword() + ", email = " +
+                getEmail() + "\n" +
+                "WHERE user_id = ?";
+        return updateQuery;
+    }
 }
+
