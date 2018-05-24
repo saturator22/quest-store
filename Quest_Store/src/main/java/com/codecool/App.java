@@ -56,6 +56,9 @@ public class App
             } else if (option == 7) {
                 MentorController mentorController = new MentorController();
                 mentorController.addArtifact();
+            } else if (option == 8) {
+                MentorController mentorController = new MentorController();
+                mentorController.updateArtifact();
             }
         }
     }
