@@ -19,4 +19,13 @@ public class AdminController implements IUserCreateable {
         mentorDAO.addMentor(mentor);
     }
 
+    public void viewMentorAccount() {
+        UserInput userInput = new UserInput();
+        int mentor_id = userInput.getInt("Enter mentor id: ");
+
+        View view = new View();
+        MentorDAO mentorDAO = new MentorDAO();
+        view.displayUser(mentorDAO.getMentorById(mentor_id));
+    }
+
 }
