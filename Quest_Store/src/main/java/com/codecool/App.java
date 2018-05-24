@@ -1,6 +1,7 @@
 package com.codecool;
 
 import com.codecool.Controller.AdminController;
+import com.codecool.Controller.MentorController;
 import com.codecool.DAO.DAO;
 import com.codecool.Model.Mentor;
 import com.codecool.Model.User;
@@ -46,6 +47,9 @@ public class App
             } else if (option == 4) {
                 AdminController adminController = new AdminController();
                 adminController.addLevel();
+            } else if (option == 5) {
+                MentorController mentorController = new MentorController();
+                mentorController.addStudent();
             }
         }
     }
