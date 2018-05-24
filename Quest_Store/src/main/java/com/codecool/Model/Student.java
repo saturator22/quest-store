@@ -48,5 +48,21 @@ public class Student extends User{
         return this.levelId;
     }
 
+    public String insertStudentQuery() {
+        String
+                insertQuery = "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
+                "VALUES ((SELECT user_id FROM users WHERE login = " + getLogin() + "), " + getClassId() + ", " + getLevelId() +
+                ", " + getGithub() + ", " + getBalance() + ", " + getEarned() + ")\n" +
+                "ON CONFLICT DO NOTHING;";
+        return  insertQuery;
+    }
 
+    public String updateStudentQuery() {
+        String
+                updateQuery = "UPDATE students\n" +
+                "SET class_id = " + getClassId() + ", level_id = " + getLevelId() + ", github = " + getGithub() +
+                ", balance = " + getBalance() + ", earned_coolcoins = " + getEarned() + "\n" +
+                "WHERE user_id = ?";
+        return updateQuery;
+    }
 }

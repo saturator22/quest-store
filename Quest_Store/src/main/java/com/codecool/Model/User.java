@@ -73,7 +73,12 @@ public abstract class User {
 
     public String updateUserQuery() {
         String
-                updateQuery = 
+                updateQuery = "UPDATE users\n" +
+                "SET role_id = " + getRoleId() + ", first_name = " + getFirstName() + ", last_name = " +
+                getLastName() + ", login = " + getLogin() + ", password = " + getPassword() + ", email = " +
+                getEmail() + "\n" +
+                "WHERE user_id = ?";
+        return updateQuery;
     }
 }
 
