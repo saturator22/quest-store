@@ -23,7 +23,7 @@ public class ArtifactDAO {
         return sendQuestQuery(artifact, query);
     }
 
-    public Artifact extractArtifact(ResultSet resultSet) throws SQLException {
+    private Artifact extractArtifact(ResultSet resultSet) throws SQLException {
         Artifact artifact = new Artifact();
 
         artifact.setArtifactId(resultSet.getInt("artifact_id"));
@@ -57,7 +57,7 @@ public class ArtifactDAO {
         return false;
     }
 
-    public List<Artifact> getArtifact(String userId, String artifactId) {
+    public List<Artifact> getStudentArtifacts(String userId, String artifactId) {
         List<Artifact> studentArtifacts = new ArrayList<>();
 
         String query = "SELECT artifacts.*, students_artifacts.user_id " +
