@@ -50,6 +50,9 @@ public class App
             } else if (option == 5) {
                 MentorController mentorController = new MentorController();
                 mentorController.addStudent();
+            } else if (option == 6) {
+                MentorController mentorController = new MentorController();
+                mentorController.addQuest();
             }
         }
     }
