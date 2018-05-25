@@ -22,17 +22,17 @@ public class App
             System.out.println("1. Admin: create mentor account\n" +
                     "2. Admin: check mentor account\n" +
                     "3. Admin: create class\n" +
-                    "4. Admin: set lvl experience\n" +
+                    "4. Admin: set lvl experience !! IN PROGRESS\n" +
                     "---------------------------------------\n" +
-                    "5. Mentor: add Student\n" +
+                    "5. Mentor: add Student !! IN PROGRESS\n" +
                     "6. Mentor: create Quest\n" +
                     "7. Mentor: create artifact\n" +
                     "8. Mentor: update artifact\n" +
-                    "9. Mentor: add artifact to store\n" +
-                    "10. Mentor: set quest category\n" +
+                    "9. Mentor: add artifact to store !! IN PROGRESS\n" +
+                    "10. Mentor: set quest category !! IN PROGRESS\n" +
                     "---------------------------------------\n" +
-                    "11. Student: see exp lvl" +
-                    "12. Student: see account info\n");
+                    "11. Student: see exp lvl !! IN PROGRESS\n" +
+                    "12. Student: see account info !! IN PROGRESS\n");
             option = userInput.getInt("Enter option: ");
 
             if (option == 1) {
