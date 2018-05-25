@@ -14,11 +14,11 @@ import java.util.List;
 public class StudentDAO extends DAO{
 
    private static final String
-            SELECT_QUERY = "SELECT users.user_id, role_id, first_name, last_name, " +
-            "login, email, class_id, level_id, github, balance, earned_coolcoins\n" +
-            "FROM students\n" +
-            "JOIN users\n" +
-            "ON users.user_id = students.user_id;";
+            SELECT_QUERY =  "SELECT users.user_id, role_id, first_name, last_name, " +
+                            "login, email, class_id, level_id, github, balance, earned_coolcoins\n" +
+                            "FROM students\n" +
+                            "JOIN users\n" +
+                            "ON users.user_id = students.user_id;";
 
     public List<Student> getStudents() {
         try {
@@ -62,10 +62,10 @@ public class StudentDAO extends DAO{
 
     public boolean updateStudentData(Student student) {
        String
-                updateStudentQuery =
-                        "UPDATE users\n" +
-                        "SET role_id = ?, first_name = ?, last_name = ?, login = ?, password = ?, email = ?\n" +
-                        "WHERE user_id = ?";
+            updateStudentQuery =
+                    "UPDATE users\n" +
+                    "SET role_id = ?, first_name = ?, last_name = ?, login = ?, password = ?, email = ?\n" +
+                    "WHERE user_id = ?";
 
         try{
             Connection connection = ConnectionBuilder.getConnection();
@@ -96,10 +96,10 @@ public class StudentDAO extends DAO{
         String
                 insertQuery =
                 "BEGIN;" +
-                        "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
-                        "VALUES (?, ?, ?, ?, ?, ?);\n" +
+                "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?);\n" +
                 "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
-                "VALUES ((SELECT user_id FROM users WHERE login = ?, ?, ?, ?, ?, ?);\n" +
+                "VALUES ((SELECT user_id FROM users WHERE login = ?), ?, ?, ?, ?, ?);\n" +
                 "COMMIT;";
 
         try {
@@ -113,12 +113,11 @@ public class StudentDAO extends DAO{
             preparedStatement.setString(5, student.getEmail());
             preparedStatement.setInt(6, student.getPassword());
             preparedStatement.setString(7, student.getLogin());
-            preparedStatement.setInt(8, student.getUserId());
-            preparedStatement.setInt(9, student.getClassId());
-            preparedStatement.setInt(10, student.getLevelId());
-            preparedStatement.setString(11, student.getGithub());
-            preparedStatement.setInt(12, student.getBalance());
-            preparedStatement.setInt(13, student.getEarned());
+            preparedStatement.setInt(8, student.getClassId());
+            preparedStatement.setInt(9, student.getLevelId());
+            preparedStatement.setString(10, student.getGithub());
+            preparedStatement.setInt(11, student.getBalance());
+            preparedStatement.setInt(12, student.getEarned());
 
             int updateResult = preparedStatement.executeUpdate();
 
