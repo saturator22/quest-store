@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO extends DAO{
+public class StudentDAO extends UserDAO{
 
    private static final String
             SELECT_QUERY =  "SELECT users.user_id, role_id, first_name, last_name, " +
@@ -42,7 +42,7 @@ public class StudentDAO extends DAO{
         return null;
     }
 
-    Student extractUserFromRow(ResultSet resultSet) throws SQLException{
+    public Student extractUserFromRow(ResultSet resultSet) throws SQLException{
         Student student = new Student();
 
         student.setUserId(resultSet.getInt("user_id"));
