@@ -41,9 +41,9 @@ public class AdminController implements IUserCreateable {
         adminDAO.addClass(classRoom);
     }
 
-    public void addLevel() {
-        UserInput userInput = new UserInput();
-        AdminDAO adminDAO = new AdminDAO();
-        adminDAO.addLevel(userInput.getInt("Enter level required balance: "));
-    }
+//    public void addLevel() {
+//        UserInput userInput = new UserInput();
+//        AdminDAO adminDAO = new AdminDAO();
+//        adminDAO.addLevel(userInput.getInt("Enter level required balance: "));
+//    }
 }

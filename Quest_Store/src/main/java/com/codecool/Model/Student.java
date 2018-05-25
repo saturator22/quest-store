@@ -51,23 +51,18 @@ public class Student extends User{
     public String insertStudentQuery() {
         String
                 insertQuery =
-//                "RELEASE savepoint;" +
-//                "SAVEPOINT savepoint;" +
                 "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
                 "VALUES ((SELECT user_id FROM users WHERE login = '" + getLogin() + "'), " + getClassId() + ", " + getLevelId() +
-                ", '" + getGithub() + "', " + getBalance() + ", " + getEarned() + ");\n";
-//                "ON CONFLICT DO NOTHING;" +
-//                "ROLLBACK TO savepoint;" +
-//                "RELEASE SAVEPOINT savepoint;" +
-//                "COMMIT;";
+                ", '" + getGithub() + "', " + getBalance() + ", " + getEarned() + ");\n" +
+                "COMMIT;";
         return  insertQuery;
     }
 
     public String updateStudentQuery() {
         String
                 updateQuery = "UPDATE students\n" +
-                "SET class_id = " + getClassId() + ", level_id = " + getLevelId() + ", github = " + getGithub() +
-                ", balance = " + getBalance() + ", earned_coolcoins = " + getEarned() + "\n" +
+                "SET class_id = " + getClassId() + ", level_id = " + getLevelId() + ", github = '" + getGithub() +
+                "', balance = " + getBalance() + ", earned_coolcoins = " + getEarned() + "\n" +
                 "WHERE user_id = ?";
         return updateQuery;
     }

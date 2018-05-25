@@ -68,14 +68,10 @@ public abstract class User {
     public String insertUserQuery() {
          String
                 insertQuery =
-//                 "BEGIN;" +
-//                 "SAVEPOINT savepoint;" +
+                 "BEGIN;" +
                  "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
                  "VALUES ( " + getRoleId() + ", '" + getFirstName() + "', '" + getLastName() + "', '" +
                  getLogin() + "', '" + getEmail() + "', " + getPassword() + ");\n";
-//                 "ROLLBACK TO savepoint;";
-//                 "ON CONFLICT DO NOTHING;";
-
          return insertQuery;
     }
 

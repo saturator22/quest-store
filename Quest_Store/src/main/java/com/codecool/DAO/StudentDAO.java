@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO {
+public class StudentDAO extends DAO{
 
    private static final String
             SELECT_QUERY = "SELECT users.user_id, role_id, first_name, last_name, " +
@@ -81,9 +81,17 @@ public class StudentDAO {
     }
 
     public boolean insertStudentData(Student student) {
-        String addUserQuery = student.insertUserQuery();
-        String addStudentQuery = student.insertStudentQuery();
-        String insertQuery = addUserQuery + addStudentQuery;
+        String
+                insertQuery =
+                "BEGIN;" +
+                        "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
+                        "VALUES (?, ?, ?, ?, ?, ?);\n" +
+                "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
+                "VALUES ((SELECT user_id FROM users WHERE login = ?);\n" +
+                "COMMIT;";
+//        String addUserQuery = student.insertUserQuery();
+//        String addStudentQuery = student.insertStudentQuery();
+//        String insertQuery = addUserQuery + addStudentQuery;
 
         try {
             Connection connection = ConnectionBuilder.getConnection();
