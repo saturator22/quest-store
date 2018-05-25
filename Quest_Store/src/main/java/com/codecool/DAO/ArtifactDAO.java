@@ -81,13 +81,13 @@ public class ArtifactDAO {
         return false;
     }
 
-    public List<Artifact> getStudentArtifacts(String userId, String artifactId) {
+    public List<Artifact> getStudentArtifacts(Integer userId) {
         List<Artifact> studentArtifacts = new ArrayList<>();
 
         String query = "SELECT artifacts.*, students_artifacts.user_id " +
                 "FROM artifacts JOIN students_artifacts " +
                 "ON students_artifacts.artifact_id = artifacts.artifact_id " +
-                "JOIN students ON students.user_id = students_artifacts.user_id WHERE students.user_id = " + userId;
+                "WHERE students_artifacts.user_id = " + userId;
 
         try {
             Connection connection = ConnectionBuilder.getConnection();
@@ -104,8 +104,32 @@ public class ArtifactDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return studentArtifacts;
+    }
+
+    public boolean addArtifactToStudent(Artifact artifact, Integer user_id) {
+        String query = "INSERT INTO students_artifacts(user_id, artifact_id, is_used) VALUES (?, ?, ?)";
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, user_id);
+            ps.setInt(2, artifact.getArtifactId());
+            ps.setBoolean(3, false);
+
+            int i = ps.executeUpdate();
+
+            ps.close();
+            connection.close();
+
+            if (i == 1) {
+                return true;
             }
 
-            return studentArtifacts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

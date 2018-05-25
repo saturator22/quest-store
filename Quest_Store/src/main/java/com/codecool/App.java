@@ -2,16 +2,11 @@ package com.codecool;
 
 import com.codecool.Controller.AdminController;
 import com.codecool.Controller.MentorController;
-import com.codecool.DAO.DAO;
-import com.codecool.DAO.StudentDAO;
-import com.codecool.Model.Mentor;
-import com.codecool.Model.Student;
-import com.codecool.Model.User;
 import com.codecool.input.UserInput;
 
-import java.util.List;
-public class App 
-{
+public class App {
+
+
     public static void main( String[] args )
     {
         UserInput userInput = new UserInput();
@@ -21,15 +16,18 @@ public class App
             System.out.println("1. Admin: create mentor account\n" +
                     "2. Admin: check mentor account\n" +
                     "3. Admin: create class\n" +
-                    "4. Admin: set lvl experience\n" +
-                    "5. Mentor: add Student\n" +
+                    "4. Admin: set lvl experience !! IN PROGRESS\n" +
+                    "---------------------------------------\n" +
+                    "5. Mentor: add Student !! IN PROGRESS\n" +
                     "6. Mentor: create Quest\n" +
                     "7. Mentor: create artifact\n" +
                     "8. Mentor: update artifact\n" +
-                    "9. Mentor: add artifact to store\n" +
-                    "10. Mentor: set quest category\n" +
-                    "11. Student: see exp lvl" +
-                    "12. Student: see account info\n");
+                    "9. Mentor: add artifact to store !! IN PROGRESS\n" +
+                    "10. Mentor: set quest category !! IN PROGRESS\n" +
+                    "---------------------------------------\n" +
+                    "11. Student: see exp lvl !! IN PROGRESS\n" +
+                    "12. Student: see account info !! IN PROGRESS\n");
+            option = userInput.getInt("Enter option: ");
 
             if (option == 1) {
                 AdminController adminController = new AdminController();
@@ -42,7 +40,7 @@ public class App
                 adminController.addClass();
             } else if (option == 4) {
                 AdminController adminController = new AdminController();
-                adminController.addLevel();
+//                adminController.addLevel(); TODO
             } else if (option == 5) {
                 MentorController mentorController = new MentorController();
                 mentorController.addStudent();
@@ -62,3 +60,5 @@ public class App
         }
     }
 }
+
+
