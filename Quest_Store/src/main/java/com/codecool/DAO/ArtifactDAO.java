@@ -36,7 +36,7 @@ public class ArtifactDAO {
 
     public boolean updateArtifact(Artifact artifact) {
         String query = "UPDATE artifacts SET name=?, price=?, description=? " +
-                "WHERE artifact_id=?=" + artifact.getArtifactId();
+                "WHERE artifact_id=" + artifact.getArtifactId();
 
         return sendQuestQuery(artifact, query);
     }
