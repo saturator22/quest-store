@@ -29,7 +29,7 @@ public class AdminDAO extends DAO {
     }
 
     public boolean addClass(ClassRoom classRoom) {
-        String query = "INSERT INTO Classes(name) VALUES(?)";
+        String query = "INSERT INTO Classes(class_name) VALUES(?)";
         boolean insertSuccessful = false;
 
         try {
