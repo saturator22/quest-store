@@ -61,11 +61,23 @@ public class StudentDAO extends DAO{
     }
 
     public boolean updateStudentData(Student student) {
-        String updateStudentQuery = student.updateStudentQuery();
+       String
+                updateStudentQuery =
+                        "UPDATE users\n" +
+                        "SET role_id = ?, first_name = ?, last_name = ?, login = ?, password = ?, email = ?\n" +
+                        "WHERE user_id = ?";
 
         try{
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(updateStudentQuery);
+
+            preparedStatement.setInt(1, student.getRoleId());
+            preparedStatement.setString(2, student.getFirstName());
+            preparedStatement.setString(3, student.getLastName());
+            preparedStatement.setString(4, student.getLogin());
+            preparedStatement.setInt(5, student.getPassword());
+            preparedStatement.setString(6, student.getEmail());
+            preparedStatement.setInt(7, student.getUserId());
 
             int updateResult = preparedStatement.executeUpdate();
 
@@ -87,15 +99,26 @@ public class StudentDAO extends DAO{
                         "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
                         "VALUES (?, ?, ?, ?, ?, ?);\n" +
                 "INSERT INTO students (user_id, class_id, level_id, github, balance, earned_coolcoins)\n" +
-                "VALUES ((SELECT user_id FROM users WHERE login = ?);\n" +
+                "VALUES ((SELECT user_id FROM users WHERE login = ?, ?, ?, ?, ?, ?);\n" +
                 "COMMIT;";
-//        String addUserQuery = student.insertUserQuery();
-//        String addStudentQuery = student.insertStudentQuery();
-//        String insertQuery = addUserQuery + addStudentQuery;
 
         try {
             Connection connection = ConnectionBuilder.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+
+            preparedStatement.setInt(1, student.getRoleId());
+            preparedStatement.setString(2, student.getFirstName());
+            preparedStatement.setString(3, student.getLastName());
+            preparedStatement.setString(4, student.getLogin());
+            preparedStatement.setString(5, student.getEmail());
+            preparedStatement.setInt(6, student.getPassword());
+            preparedStatement.setString(7, student.getLogin());
+            preparedStatement.setInt(8, student.getUserId());
+            preparedStatement.setInt(9, student.getClassId());
+            preparedStatement.setInt(10, student.getLevelId());
+            preparedStatement.setString(11, student.getGithub());
+            preparedStatement.setInt(12, student.getBalance());
+            preparedStatement.setInt(13, student.getEarned());
 
             int updateResult = preparedStatement.executeUpdate();
 

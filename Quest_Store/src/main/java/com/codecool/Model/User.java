@@ -65,24 +65,5 @@ public abstract class User {
         this.password = password;
     }
 
-    public String insertUserQuery() {
-         String
-                insertQuery =
-                 "BEGIN;" +
-                 "INSERT INTO users (role_id, first_name, last_name, login, email, password)\n" +
-                 "VALUES ( " + getRoleId() + ", '" + getFirstName() + "', '" + getLastName() + "', '" +
-                 getLogin() + "', '" + getEmail() + "', " + getPassword() + ");\n";
-         return insertQuery;
-    }
-
-    public String updateUserQuery() {
-        String
-                updateQuery = "UPDATE users\n" +
-                "SET role_id = " + getRoleId() + ", first_name = " + getFirstName() + ", last_name = " +
-                getLastName() + ", login = " + getLogin() + ", password = " + getPassword() + ", email = " +
-                getEmail() + "\n" +
-                "WHERE user_id = ?";
-        return updateQuery;
-    }
 }
 
