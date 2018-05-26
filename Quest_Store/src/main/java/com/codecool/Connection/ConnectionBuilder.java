@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectionBuilder {
-    private static final String URL = "jdbc:postgresql://localhost:5432/QuestStoreDB";
+    private static final String URL = "jdbc:postgresql://localhost:5432/bartoszjakub";
     private static final String DRIVER = "org.postgresql.Driver";
     private static final String USERNAME = "bartoszjakub";
     private static final String PASSWORD = "bartoszjakub123";
