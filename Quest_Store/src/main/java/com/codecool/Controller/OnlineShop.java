@@ -32,6 +32,21 @@ public class OnlineShop {
         return artifactDAO.getAvailableArtifacts();
     }
 
+    public boolean buyArtifact(Artifact artifact) {
+        Boolean isSuccesfull = null;
+        ArtifactDAO artifactDAO = new ArtifactDAO();
+        Integer price = artifact.getPrice();
+        Integer balance = currentAccount.getBalance();
 
+        if (balance >= price) {
+            artifactDAO.addArtifactToStudent(artifact, currentAccount.getClassId());
+            isSuccesfull = true;
+            System.out.println("Shoping succesfull, item has been added!");
+        } else {
+            System.out.println("Not enough £££. Complete more quests.");
+            isSuccesfull = false;
+        }
+        return isSuccesfull;
+    }
 
 }
