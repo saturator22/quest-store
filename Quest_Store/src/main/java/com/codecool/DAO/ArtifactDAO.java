@@ -2,13 +2,18 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Artifact;
+import com.codecool.Model.ShopObject;
 import org.postgresql.util.PSQLException;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ArtifactDAO {
+
+
 
     public Artifact getArtifactById(Integer artifactId) {
         String query = "SELECT * FROM artifacts WHERE artifact_id =" + artifactId;
@@ -51,11 +56,10 @@ public class ArtifactDAO {
         Artifact artifact = new Artifact();
 
         artifact.setArtifactId(resultSet.getInt("artifact_id"));
-        artifact.setDescription(resultSet.getString("description"));
-        artifact.setName(resultSet.getString("name"));
-        artifact.setPrice(resultSet.getInt("price"));
-//        artifact.setOwner_id(resultSet.getInt("user_id"));
-
+        artifact.setDescription(resultSet.getString("artifact_description"));
+        artifact.setName(resultSet.getString("artifact_name"));
+        artifact.setPrice(resultSet.getInt("artifact_price"));
+        artifact.setCategory(resultSet.getString("artifact_category"));
         return artifact;
     }
 
