@@ -13,7 +13,29 @@ import java.util.Set;
 
 public class ArtifactDAO {
 
+    public Set<ShopObject> getAvailableArtifacts() {
+        Set<ShopObject> allQuests = new HashSet<>();
+        String query = "SELECT * FROM artifacts";
 
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Artifact quest = extractArtifact(resultSet);
+                allQuests.add(quest);
+            }
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allQuests;
+    }
 
     public Artifact getArtifactById(Integer artifactId) {
         String query = "SELECT * FROM artifacts WHERE artifact_id =" + artifactId;
