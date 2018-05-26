@@ -1,11 +1,13 @@
 package com.codecool.Model;
 
-public class Artifact {
+import java.util.Objects;
+
+public class Artifact extends ShopObject {
     private Integer artifactId;
     private String name;
     private Integer price;
     private String description;
-    private Integer owner_id;
+    private String category;
 
     public void setName(String name) {
         this.name = name;
@@ -39,11 +41,13 @@ public class Artifact {
         this.artifactId = artifactId;
     }
 
-    public void setOwner_id(Integer student_id) {
-        this.owner_id = student_id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Integer getOwner_id() {
-        return owner_id;
+    public String getCategory() {
+        return category;
     }
+
+
 }
