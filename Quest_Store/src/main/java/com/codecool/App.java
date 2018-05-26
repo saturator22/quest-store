@@ -5,6 +5,9 @@ import com.codecool.Controller.MentorController;
 import com.codecool.Controller.OnlineShop;
 import com.codecool.DAO.StudentDAO;
 import com.codecool.Model.Artifact;
+import com.codecool.DAO.StudentDAO;
+import com.codecool.Model.Student;
+import com.codecool.Model.User;
 import com.codecool.Model.ShopObject;
 import com.codecool.Model.Student;
 import com.codecool.View.View;
@@ -36,8 +39,8 @@ public class App {
                     "10. Mentor: set quest category !! IN PROGRESS\n" +
                     "---------------------------------------\n" +
                     "11. Student: see exp lvl !! IN PROGRESS\n" +
-                    "12. Student: see account info !! IN PROGRESS\n" +
-                    "\n");
+                    "12. Student: see account info !! IN PROGRESS\n"+
+                    "13. Student: find Student by ID");
             option = userInput.getInt("Enter option: ");
 
             if (option == 1) {
@@ -67,6 +70,15 @@ public class App {
             } else if (option == 9) {
                 MentorController mentorController = new MentorController();
                 mentorController.setQuestCategory();
+            } else if (option == 13) {
+                StudentDAO studentDAO = new StudentDAO();
+                List<Student> list = studentDAO.getStudents();
+                for(Student student: list) {
+                    System.out.println(student);
+                }
+                int studentID = userInput.getInt("Type Id: ");
+                Student student = studentDAO.getStudentById(studentID);
+                System.out.println(student);
             } else if (option == 0) {
                 testShopMenu();
             }
@@ -75,10 +87,10 @@ public class App {
 
 
     public static void testShopMenu() {
-
+        StudentDAO studentDAO = new StudentDAO();
         boolean continueShopping = true;
         OnlineShop onlineShop = new OnlineShop();
-        onlineShop.setCurrenctAccount(getStudentById(5));
+        onlineShop.setCurrenctAccount(studentDAO.getStudentById(19));
         UserInput userInput = new UserInput();
 
         while(continueShopping) {

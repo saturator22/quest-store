@@ -94,7 +94,7 @@ public class QuestDAO {
         quest.setQuestId(resultSet.getInt("quest_id"));
         quest.setQuestDescription(resultSet.getString("quest_description"));
         quest.setQuestName(resultSet.getString("quest_name"));
-        quest.setQuestReward(resultSet.getInt("quest_reward"));
+        quest.setQuestReward(resultSet.getInt("quest_value"));
         quest.setQuestCategory(resultSet.getString("quest_category"));
 //        quest.setQuestOwnerId(resultSet.getInt("user_id"));
 
@@ -125,13 +125,13 @@ public class QuestDAO {
     }
 
     public boolean addQuest(Quest quest) {
-        String query = "INSERT INTO quests(quest_category, quest_name, quest_reward) VALUES (?, ?, ?)";
+        String query = "INSERT INTO quests(quest_category, quest_name, quest_value) VALUES (?, ?, ?)";
 
         return sendQuestQuery(query, quest);
     }
 
     public boolean updateQuest(Quest quest) {
-        String query = "UPDATE quests SET quest_category=?, quest_name=?, reward=? " +
+        String query = "UPDATE quests SET quest_category=?, quest_name=?, quest_value=? " +
                 "WHERE user_id=" + quest.getQuestId();
 
         return sendQuestQuery(query, quest);

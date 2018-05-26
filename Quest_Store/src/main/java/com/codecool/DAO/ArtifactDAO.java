@@ -62,14 +62,14 @@ public class ArtifactDAO {
     }
 
     public boolean updateArtifact(Artifact artifact) {
-        String query = "UPDATE artifacts SET name=?, price=?, description=? " +
+        String query = "UPDATE artifacts SET artifact_name=?, artifact_value=?, artifact_description=? " +
                 "WHERE artifact_id=" + artifact.getArtifactId();
 
         return sendQuestQuery(artifact, query);
     }
 
     public boolean addArtifact(Artifact artifact) {
-        String query = "INSERT INTO artifacts(name, price, description) VALUES (?, ?, ?)";
+        String query = "INSERT INTO artifacts(artifact_name, artifact_value, artifact_description) VALUES (?, ?, ?)";
 
         return sendQuestQuery(artifact, query);
     }
@@ -80,7 +80,7 @@ public class ArtifactDAO {
         artifact.setArtifactId(resultSet.getInt("artifact_id"));
         artifact.setDescription(resultSet.getString("artifact_description"));
         artifact.setName(resultSet.getString("artifact_name"));
-        artifact.setPrice(resultSet.getInt("artifact_price"));
+        artifact.setPrice(resultSet.getInt("artifact_value"));
         artifact.setCategory(resultSet.getString("artifact_category"));
         return artifact;
     }

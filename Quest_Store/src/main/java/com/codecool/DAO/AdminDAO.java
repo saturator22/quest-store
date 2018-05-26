@@ -8,13 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AdminDAO extends DAO {
+public class AdminDAO extends UserDAO {
 
     public boolean addMentor(Mentor mentor) {
         return addUserData(mentor);
     }
 
-    Admin extractUserFromRow(ResultSet resultSet) throws SQLException{
+     public User extractUserFromRow(ResultSet resultSet) throws SQLException{
         Admin admin = new Admin();
 
         admin.setUserId(resultSet.getInt("user_id"));

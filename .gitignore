@@ -28,6 +28,8 @@ Quest_Store/.priject
 Quest_Store/.settings
 Quest_Store/pom.xml
 
+# ConnectionClass
+Quest_Store/src/main/java/com/codecool/Connection/ConnectionBuilder.java
 
 # xml files
 *.xml

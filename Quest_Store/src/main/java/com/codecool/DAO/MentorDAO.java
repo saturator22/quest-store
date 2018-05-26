@@ -6,9 +6,9 @@ import com.codecool.Model.User;
 
 import java.sql.*;
 
-public class MentorDAO extends DAO {
+public class MentorDAO extends UserDAO {
 
-    private Mentor extractMentor (ResultSet resultSet) throws SQLException {
+    public Mentor extractUserFromRow(ResultSet resultSet) throws SQLException {
         Mentor mentor = new Mentor();
 
         mentor.setUserId(resultSet.getInt("user_id"));
@@ -19,10 +19,6 @@ public class MentorDAO extends DAO {
         mentor.setLogin(resultSet.getString("login"));
 
         return mentor;
-    }
-
-    public User extractUserFromRow(ResultSet resultSet) throws SQLException {
-        return extractMentor(resultSet);
     }
 
     public boolean insertMentorData(Mentor mentor) {
@@ -68,7 +64,7 @@ public class MentorDAO extends DAO {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                mentor = extractMentor(resultSet);
+                mentor = extractUserFromRow(resultSet);
             }
 
             statement.close();
