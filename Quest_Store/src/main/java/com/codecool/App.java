@@ -3,12 +3,15 @@ package com.codecool;
 import com.codecool.Controller.AdminController;
 import com.codecool.Controller.MentorController;
 import com.codecool.Controller.OnlineShop;
-import com.codecool.Model.Quest;
+import com.codecool.DAO.StudentDAO;
+import com.codecool.Model.Artifact;
+import com.codecool.Model.ShopObject;
+import com.codecool.Model.Student;
 import com.codecool.View.View;
 import com.codecool.input.UserInput;
 
-import javax.swing.text.html.Option;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
 
@@ -70,13 +73,17 @@ public class App {
         }
     }
 
+
     public static void testShopMenu() {
+
         boolean continueShopping = true;
         OnlineShop onlineShop = new OnlineShop();
+        onlineShop.setCurrenctAccount(getStudentById(5));
         UserInput userInput = new UserInput();
 
         while(continueShopping) {
-            System.out.println("------ONLINE SHOP------\n\n 1. See all items \n 2. See quests \n 3. See artifacts \n 4. Exit");
+            System.out.println("------ONLINE SHOP------\n\n 1. See all items \n" +
+                    " 2. See quests \n 3. See artifacts \n 4. Buy artifact \n 5. Exit \n");
             String userChoice = userInput.getString("Select option: ");
 
             if (userChoice.equals("1")) {
@@ -93,6 +100,10 @@ public class App {
                 View.displaySetOfItems(onlineShop.getAvailableArtifacts());
 
             } else if (userChoice.equals("4")) {
+                ShopObject artifact = View.selectShopObject(new ArrayList<>(onlineShop.getAvailableArtifacts()));
+                onlineShop.buyArtifact((Artifact) artifact);
+
+            } else if (userChoice.equals("5")) {
                 continueShopping = false;
 
             } else {
