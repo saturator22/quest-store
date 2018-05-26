@@ -49,5 +49,30 @@ public class Artifact extends ShopObject {
         return category;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artifact artifact = (Artifact) o;
+        return Objects.equals(getName(), artifact.getName()) &&
+                Objects.equals(getPrice(), artifact.getPrice()) &&
+                Objects.equals(getDescription(), artifact.getDescription());
+    }
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName(), getPrice(), getDescription());
+    }
+
+    @Override
+    public String toString() {
+        return "Artifact{" +
+                "artifactId=" + artifactId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }
