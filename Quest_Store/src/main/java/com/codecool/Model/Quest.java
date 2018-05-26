@@ -60,5 +60,32 @@ public class Quest extends ShopObject {
         this.questReward = questReward;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Quest quest = (Quest) o;
+        return Objects.equals(getQuestCategory(), quest.getQuestCategory()) &&
+                Objects.equals(getQuestName(), quest.getQuestName()) &&
+                Objects.equals(getQuestDescription(), quest.getQuestDescription()) &&
+                Objects.equals(getQuestReward(), quest.getQuestReward());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getQuestCategory(), getQuestName(), getQuestDescription(), getQuestReward());
+    }
+
+    @Override
+    public String toString() {
+        return "Quest{" +
+                "questId=" + questId +
+                ", questCategory='" + questCategory + '\'' +
+                ", questName='" + questName + '\'' +
+                ", questDescription='" + questDescription + '\'' +
+                ", questReward=" + questReward +
+                '}';
+    }
 
 }
