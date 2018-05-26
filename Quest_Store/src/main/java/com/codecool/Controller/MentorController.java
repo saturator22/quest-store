@@ -1,18 +1,26 @@
 package com.codecool.Controller;
 
 import com.codecool.DAO.ArtifactDAO;
+import com.codecool.DAO.MentorDAO;
 import com.codecool.DAO.QuestDAO;
 import com.codecool.DAO.StudentDAO;
-import com.codecool.Model.Artifact;
-import com.codecool.Model.Quest;
-import com.codecool.Model.Student;
-import com.codecool.Model.User;
+import com.codecool.Model.*;
 import com.codecool.input.UserInput;
+
+import java.util.List;
 
 public class MentorController implements IUserCreateable {
 
     private static final int STUDENT_ROLE = 3;
     private static final int STARTING_LVL = 1;
+
+    public List<ClassRoom> getMentorsClassRooms() {
+        MentorDAO mentorDAO = new MentorDAO();
+
+        return mentorDAO.getMentorsClasses(mentorDAO.getMentorById(21));
+    }
+
+
 
     public void addStudent() {
         UserInput userInput = new UserInput();

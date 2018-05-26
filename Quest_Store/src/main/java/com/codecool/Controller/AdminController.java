@@ -8,6 +8,9 @@ import com.codecool.Model.User;
 import com.codecool.View.View;
 import com.codecool.input.UserInput;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdminController implements IUserCreateable {
 
     private static final int MENTOR_ROLE = 2;
@@ -29,6 +32,15 @@ public class AdminController implements IUserCreateable {
         View view = new View();
         MentorDAO mentorDAO = new MentorDAO();
         view.displayUser(mentorDAO.getMentorById(mentor_id));
+    }
+
+    public List<ClassRoom> getMentorClasses() {
+        List<ClassRoom> classRooms = new ArrayList<>();
+
+        MentorDAO mentorDAO = new MentorDAO();
+
+
+        return classRooms;
     }
 
     public void  addClass() {

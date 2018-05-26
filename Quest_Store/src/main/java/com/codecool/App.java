@@ -4,12 +4,10 @@ import com.codecool.Controller.AdminController;
 import com.codecool.Controller.MentorController;
 import com.codecool.Controller.OnlineShop;
 import com.codecool.Controller.StudentController;
+import com.codecool.DAO.MentorDAO;
 import com.codecool.DAO.StudentDAO;
-import com.codecool.Model.Artifact;
+import com.codecool.Model.*;
 import com.codecool.DAO.StudentDAO;
-import com.codecool.Model.Student;
-import com.codecool.Model.User;
-import com.codecool.Model.ShopObject;
 import com.codecool.Model.Student;
 import com.codecool.View.View;
 import com.codecool.input.UserInput;
@@ -42,7 +40,8 @@ public class App {
                     "11. Student: see exp lvl !! IN PROGRESS\n" +
                     "12. Student: see account info !! IN PROGRESS\n"+
                     "13. Student: find Student by ID\n" +
-                    "14. Student: Create CrowdFund");
+                    "14. Student: Create CrowdFund" +
+                    "15. Mentor: Add Mentor to class + print mentor classes: ");
             option = userInput.getInt("Enter option: ");
 
             if (option == 1) {
@@ -89,7 +88,15 @@ public class App {
                 }
                 int groupBalance = studentController.sumGroupShoppersBalance(studentList);
                 System.out.println("Group Balance: " + groupBalance);
-            } else if (option == 0) {
+            } else if (option == 15) {
+                MentorDAO mentorDAO = new MentorDAO();
+                mentorDAO.addMentorToClassRoom(mentorDAO.getMentorById(21), 2);
+                MentorController mentorController = new MentorController();
+                List<ClassRoom> mentorClassRooms = mentorController.getMentorsClassRooms();
+                for(ClassRoom classRoom: mentorClassRooms) {
+                    System.out.println(classRoom);
+                }
+            }else if (option == 0) {
                 testShopMenu();
             }
         }
