@@ -2,7 +2,12 @@ package com.codecool;
 
 import com.codecool.Controller.AdminController;
 import com.codecool.Controller.MentorController;
+import com.codecool.DAO.StudentDAO;
+import com.codecool.Model.Student;
+import com.codecool.Model.User;
 import com.codecool.input.UserInput;
+
+import java.util.List;
 
 public class App {
 
@@ -26,7 +31,8 @@ public class App {
                     "10. Mentor: set quest category !! IN PROGRESS\n" +
                     "---------------------------------------\n" +
                     "11. Student: see exp lvl !! IN PROGRESS\n" +
-                    "12. Student: see account info !! IN PROGRESS\n");
+                    "12. Student: see account info !! IN PROGRESS\n"+
+                    "13. Student: find Student by ID");
             option = userInput.getInt("Enter option: ");
 
             if (option == 1) {
@@ -56,6 +62,15 @@ public class App {
             } else if (option == 9) {
                 MentorController mentorController = new MentorController();
                 mentorController.setQuestCategory();
+            } else if (option == 13) {
+                StudentDAO studentDAO = new StudentDAO();
+                List<Student> list = studentDAO.getStudents();
+                for(Student student: list) {
+                    System.out.println(student);
+                }
+                int studentID = userInput.getInt("Type Id: ");
+                Student student = studentDAO.getStudentById(studentID);
+                System.out.println(student);
             }
         }
     }

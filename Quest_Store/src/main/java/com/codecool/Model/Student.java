@@ -48,4 +48,19 @@ public class Student extends User{
         return this.levelId;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "userId=" + getUserId() +
+                ", roleId=" + getRoleId() +
+                ", firstName=" +getFirstName() +
+                ", lastName=" + getLastName() +
+                ", email=" + getEmail() +
+                ", classId=" + classId +
+                ", levelId=" + levelId +
+                ", github='" + github + '\'' +
+                ", balance=" + balance +
+                ", earned=" + earned +
+                '}';
+    }
 }
