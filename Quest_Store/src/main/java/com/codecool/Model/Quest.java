@@ -1,12 +1,13 @@
 package com.codecool.Model;
 
-public class Quest {
+import java.util.Objects;
+
+public class Quest extends ShopObject {
     private Integer questId;
     private String questCategory;
     private String questName;
     private String questDescription;
     private Integer questReward;
-    private Integer questOwnerId;
     private Boolean isUsed = false; /// TODO WAIT FOR APPROVAL;
 
     public Boolean getUsed() {
@@ -15,14 +16,6 @@ public class Quest {
 
     public void setUsed(Boolean used) {
         isUsed = used;
-    }
-
-    public void setQuestOwnerId(Integer ownerId) {
-        this.questOwnerId = ownerId;
-    }
-
-    public Integer getQuestOwnerId() {
-        return questOwnerId;
     }
 
     public void setQuestCategory(String questCategory) {
@@ -66,4 +59,6 @@ public class Quest {
     public void setQuestReward(Integer questReward) {
         this.questReward = questReward;
     }
+
+
 }
