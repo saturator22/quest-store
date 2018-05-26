@@ -2,12 +2,39 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Quest;
+import com.codecool.Model.ShopObject;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class QuestDAO {
+
+    public Set<ShopObject> getAvailableQuests() {
+        Set<ShopObject> allQuests = new HashSet<>();
+        String query = "SELECT * FROM quests";
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Quest quest = extractQuest(resultSet);
+                allQuests.add(quest);
+            }
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allQuests;
+    }
 
     public Quest getQuestByQuestId(Integer questId) {
         String query = "SELECT * FROM quests WHERE quest_id =" + questId;
@@ -65,7 +92,7 @@ public class QuestDAO {
         Quest quest = new Quest();
 
         quest.setQuestId(resultSet.getInt("quest_id"));
-        //TODO missing column        quest.setDescription(resultSet.getString("description"));
+        quest.setQuestDescription(resultSet.getString("quest_description"));
         quest.setQuestName(resultSet.getString("quest_name"));
         quest.setQuestReward(resultSet.getInt("quest_reward"));
         quest.setQuestCategory(resultSet.getString("quest_category"));
@@ -134,5 +161,6 @@ public class QuestDAO {
         }
         return false;
     }
+
 
 }
