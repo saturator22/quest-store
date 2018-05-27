@@ -29,5 +29,33 @@ public class LoginController {
     }
 
 
+    public static User logIntoSystem() {
+        User user = null;
+        boolean signingDone = false;
+
+        int triesLimit = 3;
+
+        while (!signingDone) {
+            System.out.println("----- Log into QuestStore 2.0 -----\n\n");
+
+            for (int i = 0; i<triesLimit; i++) {
+                String login = getLogin();
+                Integer password = getPassword().hashCode();
+                user = logIntoAccount(login, password);
+
+                if (user != null) {
+                    if(user.getLogin().equals(login)) {
+                        System.out.println("Hello " + user.getFirstName());
+                        return user;
+                    }
+                }
+                System.out.println("Wrong login or password. " + (triesLimit - i - 1) + " tries left.");
+            }
+            System.out.println("Failed.Check your login and password.!");
+            signingDone = true;
+        }
+        return user;
+    }
+
 
 }
