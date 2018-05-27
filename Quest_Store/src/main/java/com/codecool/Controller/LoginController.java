@@ -16,5 +16,18 @@ public class LoginController {
         this.userId = userId;
     }
 
+    private static String getLogin() {
+        UserInput input = new UserInput();
+        String login = input.getString(" |  Enter login:");
+        return login;
+    }
+
+    private static Integer getPassword() {
+        UserInput input = new UserInput();
+        String password = input.getString(" |  Enter password:");
+        return password.hashCode();
+    }
+
+
 
 }
