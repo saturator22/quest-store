@@ -57,5 +57,37 @@ public class LoginController {
         return user;
     }
 
+    private static User logIntoAccount(String login, Integer password) {
+        LoginDAO loginDAO = new LoginDAO();
+        User user = null;
+        LoginData loginData = loginDAO.getLoginData(password, login);
 
+        Integer roleId = loginData.getRoleId();
+        Integer userId = loginData.getUserId();
+
+        if (userId == null) {
+            return null;
+        }
+
+        switch (roleId) {
+
+            case 3:
+                /// Roles: Student
+                StudentDAO studentDAO = new StudentDAO();
+                user = studentDAO.getStudentById(userId);
+                break;
+
+            case 2:
+                /// Roles: Mentor
+                MentorDAO mentorDAO = new MentorDAO();
+                user = mentorDAO.getMentorById(userId);
+                break;
+
+            default:
+                System.out.println("Login data incorrect...");
+                break;
+
+        }
+        return user;
+    }
 }
