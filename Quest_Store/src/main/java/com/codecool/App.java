@@ -1,6 +1,7 @@
 package com.codecool;
 
 import com.codecool.Controller.AdminController;
+import com.codecool.Controller.LoginController;
 import com.codecool.Controller.MentorController;
 import com.codecool.Controller.OnlineShop;
 import com.codecool.Controller.StudentController;
@@ -100,7 +101,7 @@ public class App {
         StudentDAO studentDAO = new StudentDAO();
         boolean continueShopping = true;
         OnlineShop onlineShop = new OnlineShop();
-        onlineShop.setCurrenctAccount(studentDAO.getStudentById(19));
+        onlineShop.setCurrenctAccount((Student) LoginController.logIntoSystem());
         UserInput userInput = new UserInput();
 
         while(continueShopping) {
