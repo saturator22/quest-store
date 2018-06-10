@@ -105,11 +105,11 @@ body {
   }
   
   #category-selection a:hover {
-    color: #eb484c;
+    color: #9b0306;
     text-shadow: -2px -1px #dfded4;
   }
   
   #category-selection .active {
-    color: #eb484c;
+    color: #9b0306;
     text-shadow: -2px -1px #dfded4;
   }
