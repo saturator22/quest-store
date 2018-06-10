@@ -2,6 +2,7 @@
 
 <html>
 <script src="assets/js/filterArtifacts.js"></script>
+<script src="assets/js/toggleStats.js"></script>
 
 <head>
     <title>QuestStore: Student</title>
@@ -24,7 +25,7 @@
         <section>
             <div id="category-selection">
                 <a href="#" onclick="toggleInventory();">inventory</a>
-                <a href="#" onClick="toggle();">featured</a>
+                <a href="#" onClick="toggleStats();">stats</a>
                 <a class="btn active" href="#" onClick="filterSelection('all');">all</a>
                 <a class="btn" href="#" onClick="filterSelection('personal')">personal</a>
                 <a class="btn" href="#" onClick="filterSelection('group')">group</a>
@@ -32,6 +33,10 @@
         </section>
 
         <section id="main">
+            <div id="character">
+                <img class="avatar-picture" src="images/avatar/avatar.png" alt="Combat training">
+            </div>
+
             <div class="cards-grid">
 
                 <div class="card all personal">
@@ -48,19 +53,19 @@
                 </div>
 
 
-            <div class="card all personal">
-                <div class="card-container">
-                    <h2 class="card-header">Teleport</h2>
-                    <h3 class="card-price">1500</h3>
-                    <img class="card-picture" src="images/cards/teleport.png" alt="Combat training">
-                    <h3 class="card-description">Whole room goes to off-school program. </h3>
-                </div>
+                <div class="card all personal">
+                    <div class="card-container">
+                        <h2 class="card-header">Teleport</h2>
+                        <h3 class="card-price">1500</h3>
+                        <img class="card-picture" src="images/cards/teleport.png" alt="Combat training">
+                        <h3 class="card-description">Whole room goes to off-school program. </h3>
+                    </div>
 
-                <div class="buy-button">
-                    <h2 id="buy-button">get artifact</h2>
+                    <div class="buy-button">
+                        <h2 id="buy-button">get artifact</h2>
+                    </div>
                 </div>
             </div>
-    </div>
 
     </div>
     </section>
