@@ -11,11 +11,20 @@
 
 <body>
     <div class="page-wrap">
+
         <section class="banner">
-                <img class="main-logo" src="images/logo/logo-med.png" alt="qs-logo">
-            </div>
+            <img class="main-logo" src="images/logo/logo-med.png" alt="qs-logo">
         </section>
 
+        <section>
+            <div id="category-selection">
+                <a href="#" onclick="toggleInventory();">inventory</a>
+                <a href="#" onClick="toggle();">featured</a>
+                <a class="btn active" href="#" onClick="filterSelection('all');">all</a>
+                <a class="btn" href="#" onClick="filterSelection('personal')">personal</a>
+                <a class="btn" href="#" onClick="filterSelection('group')">group</a>
+            </div>
+        </section>
 
 
 
