@@ -102,14 +102,25 @@ body {
     font-size: 3vw;
     text-decoration: none;
     text-shadow: -2px -1px #dfded4;
-  }
+}
   
-  #category-selection a:hover {
+#category-selection a:hover {
     color: #9b0306;
     text-shadow: -2px -1px #dfded4;
-  }
+}
   
-  #category-selection .active {
+ #category-selection .active {
     color: #9b0306;
     text-shadow: -2px -1px #dfded4;
-  }
+}
+
+/* cards-gallery */
+
+.cards-container {
+    width: 90%;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+    padding-top: 1em;
+}
+
