@@ -114,13 +114,92 @@ body {
     text-shadow: -2px -1px #dfded4;
 }
 
+/* card-presentation */
+
+.card {
+    background-image: url(../../images/textures/paper-texture.jpg); 
+    background-size: cover;
+    margin: 1em;
+    width: 240px;
+    height: 480px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border: solid 5px #dfded4;
+    transition: 0.3s;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.card-header {
+    font-family: Pacifico;
+    color: #2f0500;
+    text-shadow: -2px -1px #dfded4;
+    font-weight: 300;
+    font-size: 2em;
+    margin-bottom: 0.2em;
+    margin-top: 0.3em;
+    text-align: center;
+}
+
+.card-price {
+    font-family: 'Open Sans';
+    color: rgb(151, 45, 13);
+    text-shadow: -2px -1px #dfded4;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-bottom: 0.4em;
+    margin-top: 0.4em;
+    text-align: center;
+}
+
+.card-description {
+    font-family: 'Open Sans';
+    color: #2f0500;
+    font-weight: 200;
+    font-size: 1em;
+    margin: 0.2em;
+    min-height: 50px;
+}
+
+.card-picture {
+    max-width: 230px;
+    display: inline-block;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transform: scale(1.05);
+}
+
+#buy-button {
+    border: solid 0.2em white;
+    font-family: Pacifico;
+    color: white;
+    font-weight: 100;
+    font-size: 1.3em;
+    margin-bottom: 0.2em;
+    margin-top: 0.8em;
+    border-radius: 10px;
+    padding: 0.6em;
+    background-color: rgb(151, 45, 13);
+}
+  
+  #buy-button:hover {
+    border: solid 0.2em rgb(151, 45, 13);
+    color: rgba(151, 45, 13, 0.432);
+    background-color: rgba(255, 255, 255, 0.616);
+}
+
 /* cards-gallery */
 
-.cards-container {
+.cards-grid {
     width: 90%;
     margin: 0 auto;
     overflow: auto;
     text-align: center;
     padding-top: 1em;
+    padding-bottom: 2em;
+    display: flex;
 }
+
+
 
