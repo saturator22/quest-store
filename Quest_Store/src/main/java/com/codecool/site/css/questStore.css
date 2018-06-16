@@ -1,0 +1,217 @@
+/* Reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+  
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+  
+body {
+    background-image: url(../pictures/gradient/background.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    line-height: 1;
+}
+  
+ol, ul {
+    list-style: none;
+}
+  
+blockquote, q {
+    quotes: none;
+}
+  
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+  
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+  
+/* Box Model */
+  
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+  
+/* Basic */
+  
+@-ms-viewport {
+    width: device-width;
+}
+  
+body {
+    -ms-overflow-style: scrollbar;
+}
+  
+@media screen and (max-width: 480px) {
+    html, body {
+        min-width: 320px;
+    }
+}
+  
+.page-wrap {
+
+}
+
+/* banner */
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-logo {
+    max-width: 100%;
+    height: auto;
+    z-index: 10;
+}
+
+/* category-selection */
+
+#category-selection {
+    display: flex;
+    background-image: url(../pictures/bars/category-bar.png);
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    background-size: 70%;
+    padding-top: 11%;
+    margin-top: -10%;
+    position: sticky; 
+    top: 0;
+    max-width: 100%; 
+    transition: top 0.3s;
+    justify-content: center;
+}
+
+#category-selection a {
+    padding-bottom: 2.2vw;
+    padding-left: 2.5vw;
+    font-family: "Pacifico";
+    color: #2f0500;
+    font-size: 3vw;
+    text-decoration: none;
+    text-shadow: -2px -1px #dfded4;
+}
+  
+#category-selection a:hover {
+    color: #9b0306;
+    text-shadow: -2px -1px #dfded4;
+}
+  
+ #category-selection .active {
+    color: #9b0306;
+    text-shadow: -2px -1px #dfded4;
+}
+
+ /* avatar menu */
+
+#character {
+    display: none;
+    text-align: left;
+    margin-left: 16%;
+    margin-right: 18%;
+    background-color: rgba(255, 255, 255, 0.185);
+    box-shadow: 0 60px 50px 0 rgba(255, 255, 255, 0.185);
+ }
+
+
+/* card-presentation */
+
+.card {
+    background-image: url(../pictures/textures/paper-texture.jpg); 
+    background-size: cover;
+    margin: 1em;
+    width: 240px;
+    height: 480px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border: solid 5px #dfded4;
+    transition: 0.3s;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.card-header {
+    font-family: Pacifico;
+    color: #2f0500;
+    text-shadow: -2px -1px #dfded4;
+    font-weight: 300;
+    font-size: 2em;
+    margin-bottom: 0.2em;
+    margin-top: 0.3em;
+    text-align: center;
+}
+
+.card-price {
+    font-family: 'Open Sans';
+    color: rgb(151, 45, 13);
+    text-shadow: -2px -1px #dfded4;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-bottom: 0.4em;
+    margin-top: 0.4em;
+    text-align: center;
+}
+
+.card-description {
+    font-family: 'Open Sans';
+    color: #2f0500;
+    font-weight: 200;
+    font-size: 1em;
+    margin: 0.2em;
+    min-height: 50px;
+}
+
+.card-picture {
+    max-width: 230px;
+    display: inline-block;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transform: scale(1.05);
+}
+
+#buy-button {
+    border: solid 0.2em white;
+    font-family: Pacifico;
+    color: white;
+    font-weight: 100;
+    font-size: 1.3em;
+    margin-bottom: 0.2em;
+    margin-top: 0.8em;
+    border-radius: 10px;
+    padding: 0.6em;
+    background-color: rgb(151, 45, 13);
+}
+  
+  #buy-button:hover {
+    border: solid 0.2em rgb(151, 45, 13);
+    color: rgba(151, 45, 13, 0.432);
+    background-color: rgba(255, 255, 255, 0.616);
+}
+
+/* cards-gallery */
+
+.cards-grid {
+    width: 90%;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    display: flex;
+}
+
+
+
