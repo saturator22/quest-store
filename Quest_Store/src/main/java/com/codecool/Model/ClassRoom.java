@@ -20,4 +20,11 @@ public class ClassRoom {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "ClassRoom{" +
+                "classId=" + classId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

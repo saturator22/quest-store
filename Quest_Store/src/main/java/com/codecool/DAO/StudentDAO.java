@@ -21,7 +21,7 @@ public class StudentDAO extends UserDAO{
                             "ON users.user_id = students.user_id;";
 
 
-    public Student getStudentById(Integer id) {
+   public Student getStudentById(Integer id) {
         String
                 findByIdQuery = "SELECT users.user_id, role_id, first_name, last_name, login, email, password, " +
                                 "class_id, level_id, github, balance, earned_coolcoins\n" +

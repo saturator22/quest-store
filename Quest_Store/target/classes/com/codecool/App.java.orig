@@ -1,19 +1,24 @@
 package com.codecool;
 
 import com.codecool.Controller.AdminController;
-import com.codecool.Controller.LoginController;
 import com.codecool.Controller.MentorController;
+<<<<<<< HEAD
 import com.codecool.Controller.OnlineShop;
-import com.codecool.Controller.StudentController;
-import com.codecool.DAO.MentorDAO;
 import com.codecool.DAO.StudentDAO;
-import com.codecool.Model.*;
-import com.codecool.DAO.StudentDAO;
+import com.codecool.Model.Artifact;
+import com.codecool.Model.ShopObject;
 import com.codecool.Model.Student;
 import com.codecool.View.View;
 import com.codecool.input.UserInput;
 
 import java.util.ArrayList;
+=======
+import com.codecool.DAO.StudentDAO;
+import com.codecool.Model.Student;
+import com.codecool.Model.User;
+import com.codecool.input.UserInput;
+
+>>>>>>> StudentDAO
 import java.util.List;
 
 public class App {
@@ -39,10 +44,13 @@ public class App {
                     "10. Mentor: set quest category !! IN PROGRESS\n" +
                     "---------------------------------------\n" +
                     "11. Student: see exp lvl !! IN PROGRESS\n" +
+<<<<<<< HEAD
+                    "12. Student: see account info !! IN PROGRESS\n" +
+                    "\n");
+=======
                     "12. Student: see account info !! IN PROGRESS\n"+
-                    "13. Student: find Student by ID\n" +
-                    "14. Student: Create CrowdFund" +
-                    "15. Mentor: Add Mentor to class + print mentor classes: ");
+                    "13. Student: find Student by ID");
+>>>>>>> StudentDAO
             option = userInput.getInt("Enter option: ");
 
             if (option == 1) {
@@ -72,32 +80,8 @@ public class App {
             } else if (option == 9) {
                 MentorController mentorController = new MentorController();
                 mentorController.setQuestCategory();
-            } else if (option == 13) {
-                StudentDAO studentDAO = new StudentDAO();
-                List<Student> list = studentDAO.getStudents();
-                for(Student student: list) {
-                    System.out.println(student);
-                }
-                int studentID = userInput.getInt("Type Id: ");
-                Student student = studentDAO.getStudentById(studentID);
-                System.out.println(student);
-            } else if (option == 14){
-                StudentController studentController = new StudentController();
-                List<Student> studentList = studentController.getCrowdFundStudents();
-                for (Student student: studentList) {
-                    System.out.println(student);
-                }
-                int groupBalance = studentController.sumGroupShoppersBalance(studentList);
-                System.out.println("Group Balance: " + groupBalance);
-            } else if (option == 15) {
-                MentorDAO mentorDAO = new MentorDAO();
-                mentorDAO.addMentorToClassRoom(mentorDAO.getMentorById(21), 2);
-                MentorController mentorController = new MentorController();
-                List<ClassRoom> mentorClassRooms = mentorController.getMentorsClassRooms();
-                for(ClassRoom classRoom: mentorClassRooms) {
-                    System.out.println(classRoom);
-                }
-            }else if (option == 0) {
+<<<<<<< HEAD
+            } else if (option == 0) {
                 testShopMenu();
             }
         }
@@ -105,10 +89,10 @@ public class App {
 
 
     public static void testShopMenu() {
-        StudentDAO studentDAO = new StudentDAO();
+
         boolean continueShopping = true;
         OnlineShop onlineShop = new OnlineShop();
-        onlineShop.setCurrenctAccount((Student) LoginController.logIntoSystem());
+        onlineShop.setCurrenctAccount(getStudentById(5));
         UserInput userInput = new UserInput();
 
         while(continueShopping) {
@@ -138,6 +122,17 @@ public class App {
 
             } else {
                 System.out.println("Wrong selection...");
+=======
+            } else if (option == 13) {
+                StudentDAO studentDAO = new StudentDAO();
+                List<Student> list = studentDAO.getStudents();
+                for(Student student: list) {
+                    System.out.println(student);
+                }
+                int studentID = userInput.getInt("Type Id: ");
+                Student student = studentDAO.getStudentById(studentID);
+                System.out.println(student);
+>>>>>>> StudentDAO
             }
         }
     }
