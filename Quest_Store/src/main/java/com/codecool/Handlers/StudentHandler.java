@@ -27,5 +27,10 @@ public class StudentHandler implements HttpHandler {
         return availableArtifacts;
     }
 
+    private List<Artifact> getStudentsArtifacts(Integer studentId) {
+        ArtifactDAO aDAO = new ArtifactDAO();
+        List<Artifact> studentInventory = new ArrayList<>(aDAO.getStudentArtifacts(studentId));
+    }
+
 
 }
