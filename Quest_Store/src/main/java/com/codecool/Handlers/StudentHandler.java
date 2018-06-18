@@ -32,5 +32,19 @@ public class StudentHandler implements HttpHandler {
         List<Artifact> studentInventory = new ArrayList<>(aDAO.getStudentArtifacts(studentId));
     }
 
+    private void sendPersonalizedPage(HttpExchange httpExchange, String sessionId) throws IOException {
+        StudentDAO sDAO = new StudentDAO();
+        Integer userId = sessionsUsers.get(sessionId);
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questStore.twig");
+        JtwigModel model = JtwigModel.newModel();
+        model.with("available-quests", getAvailableArtifacts();
+        model.with("artifact-button-mode", "Buy Artifact");
+        String response = template.render(model);
+        httpExchange.sendResponseHeaders(200, response.length());
+        OutputStream os = httpExchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
 
 }
