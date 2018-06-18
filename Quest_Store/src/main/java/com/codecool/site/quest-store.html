@@ -4,6 +4,7 @@
 <script src="js/filterArtifacts.js"></script>
 <script src="js/toggleStats.js"></script>
 
+
 <head>
     <title>QuestStore: Student</title>
     <meta charset="utf-8" />
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="css/questStore.css" />
 </head>
 
-<body>
+<body onload="filterSelection('all');">
     <div class="page-wrap">
 
         <section class="banner">
@@ -28,7 +29,7 @@
                 <a href="#" onClick="toggleStats();">stats</a>
                 <a class="btn active" href="#" onClick="filterSelection('all');">all</a>
                 <a class="btn" href="#" onClick="filterSelection('personal')">personal</a>
-                <a class="btn" href="#" onClick="filterSelection('group')">group</a>
+                <a class="btn" href="#" onClick="filterSelection('group')">group</a> 
             </div>
         </section>
 
@@ -53,7 +54,7 @@
                 </div>
 
 
-                <div class="card all personal">
+                <div class="card all group">
                     <div class="card-container">
                         <h2 class="card-header">Teleport</h2>
                         <h3 class="card-price">1500</h3>
@@ -71,6 +72,7 @@
     </section>
 
     </div>
+    <script src="js/filterSelection.js"></script>
 </body>
 
 
