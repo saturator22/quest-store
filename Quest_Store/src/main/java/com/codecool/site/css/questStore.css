@@ -138,7 +138,7 @@ body {
     border: solid 5px #dfded4;
     transition: 0.3s;
     border-radius: 10px;
-    display: inline-block;
+    display: none;
 }
 
 .card-header {
@@ -201,6 +201,12 @@ body {
     background-color: rgba(255, 255, 255, 0.616);
 }
 
+/*filter-cards*/
+
+.show {
+  display: inline-block;
+}
+
 /* cards-gallery */
 
 .cards-grid {
@@ -212,6 +218,9 @@ body {
     padding-bottom: 2em;
     display: flex;
 }
+
+
+
 
 
 
