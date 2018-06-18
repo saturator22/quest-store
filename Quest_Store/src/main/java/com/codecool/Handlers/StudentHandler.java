@@ -21,5 +21,11 @@ public class StudentHandler implements HttpHandler {
         System.out.println("Not implemented yet");
     }
 
+    private List<Artifact> getAvailableArtifacts() {
+        ArtifactDAO aDAO = new ArtifactDAO();
+        List<Artifact> availableArtifacts = new ArrayList<Artifact>(aDAO.getAvailableArtifacts());
+        return availableArtifacts;
+    }
+
 
 }
