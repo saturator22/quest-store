@@ -37,7 +37,7 @@ public class StaticHandler implements HttpHandler {
         String response = "404 (Not Found)\n";
         httpExchange.sendResponseHeaders(404, response.length());
         OutputStream os = httpExchange.getResponseBody();
-        os.write(response.toString().getBytes());
+        os.write(response.getBytes());
         os.close();
     }
 
