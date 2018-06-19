@@ -3,61 +3,102 @@
 <html>
 <script src="js/filterArtifacts.js"></script>
 <script src="js/toggleStats.js"></script>
+<script src="js/toggleInventory.js"></script>
+
 
 <head>
-    <title>QuestStore: Student</title>
-    <meta charset="utf-8" />
+  <title>QuestStore: Student</title>
+  <meta charset="utf-8" />
 
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-    <link rel="stylesheet" href="static/css/questStore.css" />
+  <link rel="stylesheet" href="css/questStore.css" />
 </head>
 
-<body>
-    <div class="page-wrap">
+<body onload="filterSelection('all');">
+  <div class="page-wrap">
 
-        <section class="banner">
-            <img class="main-logo" src="static/pictures/logo/logo-med.png" alt="qs-logo">
-        </section>
-
-        <section>
-            <div id="category-selection">
-                <a href="#" onclick="toggleInventory();">inventory</a>
-                <a href="#" onClick="toggleStats();">stats</a>
-                <a class="btn active" href="#" onClick="filterSelection('all');">all</a>
-                <a class="btn" href="#" onClick="filterSelection('personal')">personal</a>
-                <a class="btn" href="#" onClick="filterSelection('group')">group</a>
-            </div>
-        </section>
-
-        <section id="main">
-            <div id="character">
-                <img class="avatar-picture" src="static/pictures/avatar/avatar.png" alt="Combat training">
-            </div>
-
-            <div class="cards-grid">
-                {{% for quest in available-quests %}}
-
-                <div class="{{ quest.category }}">
-                    <div class="card-container">
-                        <h2 class="card-header"> {{ quest.name }} /h2>
-                        <h3 class="card-price"> {{ quest.price }} </h3>
-                        <img class="card-picture" src="{{ quest-picture }}" alt="{{ quest-picture-alt }} ">
-                        <h3 class="card-description">{{ quest.</h3>
-                    </div>
-
-                    <div class="buy-button">
-                        <h2 id="buy-button"> {{ artifact-button-mode }} </h2>
-                    </div>
-                </div>
-            </div>
-
-    </div>
+    <section class="banner">
+      <img class="main-logo" src="pictures/logo/logo-med.png" alt="qs-logo">
     </section>
 
-    </div>
+    <section>
+      <div id="category-selection">
+        <a href="#" onclick="toggleInventory();">inventory</a>
+        <a href="#" onClick="toggleStats();">stats</a>
+        <a class="btn active" href="#" onClick="filterSelection('all');">all</a>
+        <a class="btn" href="#" onClick="filterSelection('personal')">personal</a>
+        <a class="btn" href="#" onClick="filterSelection('group')">group</a>
+      </div>
+    </section>
+
+    <section id="main">
+      <div id="character">
+        <img class="avatar-picture" src="pictures/avatar/avatar.png" alt="Combat training">
+        <div class="stats">
+          <table>
+            <tr>
+              <th>name:</th>
+              <td class="stat-value"> {{ user-name }} </th>
+            </tr>
+            <tr>
+              <th>ballance:</th>
+              <td class="stat-value"> {{ user-ballance }} </td>
+            </tr>
+            <tr>
+              <th>level:</th>
+              <td class="stat-value"> {{ user-level }} </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <section>
+        <div id="inventory">
+        {{% for equipped-artifact in student-artifacts %}}
+
+          <div class=" {{ equipped-artifact.category }} ">
+            <div class="card-container">
+              <h2 class="card-header"> {{ equipped-artifact.name }} </h2>
+              <h3 class="card-price"> {{ equipped-artifact.price }} </h3>
+              <img class="card-picture" src="pictures/cards/ {{ equipped-artifact.name }}.png" alt=" {{ equipped-artifact.name }}">
+              <h3 class="card-description"> {{ equipped-artifact.description }} .</h3>
+            </div>
+            <div class="buy-button">
+              <h2 id="buy-button">get artifact</h2>
+            </div>
+          </div>
+          {{% end for %}}
+        </div>
+
+      </section>
+
+      <div class="cards-grid">
+
+        {{% for artifact in available-artifacts %}}
+
+          <div class=" {{ artifact.category }} ">
+            <div class="card-container">
+              <h2 class="card-header"> {{ artifact.name }} </h2>
+              <h3 class="card-price"> {{ artifact.price }} </h3>
+              <img class="card-picture" src="pictures/cards/ {{ artifact.name }}.png" alt=" {{ artifact.name }}">
+              <h3 class="card-description"> {{ artifact.description }} .</h3>
+            </div>
+            <div class="buy-button">
+              <h2 id="buy-button">get artifact</h2>
+            </div>
+          </div>
+          {{% end for %}}
+
+      </div>
+
+  </div>
+  </section>
+
+  </div>
+  <script src="js/filterSelection.js"></script>
 </body>
 
 
