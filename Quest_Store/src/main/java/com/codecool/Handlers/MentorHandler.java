@@ -1,7 +1,12 @@
 package com.codecool.Handlers;
 
+import com.codecool.DAO.MentorDAO;
+import com.codecool.Model.ClassRoom;
+import com.codecool.Model.Mentor;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -16,45 +21,80 @@ public class MentorHandler implements HttpHandler {
 
         String response = "";
         String method = httpExchange.getRequestMethod();
+        String requestURI = httpExchange.getRequestURI().toString();
+
+        MentorDAO mentorDAO = new MentorDAO();
+        Mentor mentor = mentorDAO.getMentorById(21);
+        List<ClassRoom> classRooms = mentorDAO.getMentorsClasses(mentor);
+
+        final String DASHBOARD = "/dashboard";
+        final String CLASSES = "/dashboard/classes";
 
         // Send a form if it wasn't submitted yet.
         if(method.equals("GET")){
 
-            List<Post> postsList = postDao.getAllPosts();
+            switch (requestURI) {
+                case DASHBOARD:
+                    response = getDashboardLayout();
+                    break;
+                case CLASSES:
+                    response = getClassesLayout(classRooms);
+                    break;
+            }
 
-            JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/template.twig");
-
-            JtwigModel model = JtwigModel.newModel();
-
-            model.with("postData", postsList);
-
-            response = template.render(model);
         }
 
         // If the form was submitted, retrieve it's content.
-        if(method.equals("POST")){
-            InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
-            BufferedReader br = new BufferedReader(isr);
-            String formData = br.readLine();
-
-            System.out.println(formData);
-            Map inputs = parseFormData(formData);
-
-            Post post = new Post(inputs.get("Message").toString(), inputs.get("Name").toString(),
-                    inputs.get("Email").toString(), null);
-
-            System.out.println(post.email);
-            System.out.println(post.name);
-            System.out.println(post.message);
-
-            postDao.insertPost(post);
-
-        }
+//        if(method.equals("POST")){
+//            InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
+//            BufferedReader br = new BufferedReader(isr);
+//            String formData = br.readLine();
+//
+//            System.out.println(formData);
+//            Map inputs = parseFormData(formData);
+//
+//            Post post = new Post(inputs.get("Message").toString(), inputs.get("Name").toString(),
+//                    inputs.get("Email").toString(), null);
+//
+//            System.out.println(post.email);
+//            System.out.println(post.name);
+//            System.out.println(post.message);
+//
+//            postDao.insertPost(post);
+//
+//        }
 
         httpExchange.sendResponseHeaders(200, response.length());
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
+    }
+
+    private String getClassesLayout(List<ClassRoom> classRooms) {
+        String response;
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("static/templates/pages/studentManagement.twig");
+        JtwigModel model = JtwigModel.newModel();
+
+        model.with("classes", classRooms);
+
+        for(ClassRoom classRoom: classRooms) {
+            System.out.println(classRoom);
+        }
+
+        response = template.render(model);
+
+        return response;
+    }
+
+    private String getDashboardLayout() {
+        String response;
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("static/templates/pages/mentor.twig");
+        JtwigModel model = JtwigModel.newModel();
+        response = template.render(model);
+
+        return response;
     }
 
     /**
