@@ -12,6 +12,7 @@ import org.jtwig.JtwigTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,25 @@ public class StudentHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        System.out.println("Not implemented yet");
+        final String GET_METHOD = "GET";
+        final String POST_METHOD = "POST";
+        String method = httpExchange.getRequestMethod();
+
+        if (method.equals(GET_METHOD)) {
+            String sessionCookie = httpExchange.getRequestHeaders().getFirst("Cookie");
+            sendPersonalizedPage(httpExchange);
+        }
+
+        if (method.equals(POST_METHOD)) {
+            sendPersonalizedPage(httpExchange);
+        }
+
+        sendPersonalizedPage(httpExchange);
     }
 
     private List<ShopObject> getAvailableArtifacts() {
         ArtifactDAO aDAO = new ArtifactDAO();
-        List<ShopObject> availableArtifacts = new ArrayList<ShopObject>(aDAO.getAvailableArtifacts());
+        List<ShopObject> availableArtifacts = new ArrayList<>(aDAO.getAvailableArtifacts());
         return availableArtifacts;
     }
 
@@ -34,18 +48,18 @@ public class StudentHandler implements HttpHandler {
         return studentInventory;
     }
 
-    private void sendPersonalizedPage(HttpExchange httpExchange, String sessionId) throws IOException {
+    private void sendPersonalizedPage(HttpExchange httpExchange) throws IOException {
         StudentDAO sDAO = new StudentDAO();
-        Integer userId = 1;
+        Integer userId = 19;
         Student activeStudent = sDAO.getStudentById(userId);
 //        Integer userId = sessionsUsers.get(sessionId);
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questStore.twig");
         JtwigModel model = JtwigModel.newModel();
-        model.with("user-name", activeStudent.getFirstName() + " " + activeStudent.getLastName());
-        model.with("user-ballance", activeStudent.getBalance());
-        model.with("user-level", activeStudent.getLevelId());
-        model.with("owned-artifacts", getOwnedArtifacts(userId));
-        model.with("available-artifacts", getAvailableArtifacts());
+        model.with("username", activeStudent.getFirstName() + " " + activeStudent.getLastName());
+        model.with("userbalance", activeStudent.getBalance());
+        model.with("userlevel", activeStudent.getLevelId());
+        model.with("ownedcards", getOwnedArtifacts(userId));
+        model.with("availablecards", getAvailableArtifacts());
         String response = template.render(model);
         httpExchange.sendResponseHeaders(200, response.length());
         OutputStream os = httpExchange.getResponseBody();
