@@ -3,6 +3,7 @@ package com.codecool.Handlers;
 import com.codecool.DAO.ArtifactDAO;
 import com.codecool.DAO.StudentDAO;
 import com.codecool.Model.Artifact;
+import com.codecool.Model.ShopObject;
 import com.codecool.Model.Student;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -21,25 +22,30 @@ public class StudentHandler implements HttpHandler {
         System.out.println("Not implemented yet");
     }
 
-    private List<Artifact> getAvailableArtifacts() {
+    private List<ShopObject> getAvailableArtifacts() {
         ArtifactDAO aDAO = new ArtifactDAO();
-        List<Artifact> availableArtifacts = new ArrayList<Artifact>(aDAO.getAvailableArtifacts());
+        List<ShopObject> availableArtifacts = new ArrayList<ShopObject>(aDAO.getAvailableArtifacts());
         return availableArtifacts;
     }
 
-    private List<Artifact> getStudentsArtifacts(Integer studentId) {
+    private List<Artifact> getOwnedArtifacts(Integer studentId) {
         ArtifactDAO aDAO = new ArtifactDAO();
         List<Artifact> studentInventory = new ArrayList<>(aDAO.getStudentArtifacts(studentId));
+        return studentInventory;
     }
 
     private void sendPersonalizedPage(HttpExchange httpExchange, String sessionId) throws IOException {
         StudentDAO sDAO = new StudentDAO();
-        Integer userId = sessionsUsers.get(sessionId);
-
+        Integer userId = 1;
+        Student activeStudent = sDAO.getStudentById(userId);
+//        Integer userId = sessionsUsers.get(sessionId);
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questStore.twig");
         JtwigModel model = JtwigModel.newModel();
-        model.with("available-quests", getAvailableArtifacts();
-        model.with("artifact-button-mode", "Buy Artifact");
+        model.with("user-name", activeStudent.getFirstName() + " " + activeStudent.getLastName());
+        model.with("user-ballance", activeStudent.getBalance());
+        model.with("user-level", activeStudent.getLevelId());
+        model.with("owned-artifacts", getOwnedArtifacts(userId));
+        model.with("available-artifacts", getAvailableArtifacts());
         String response = template.render(model);
         httpExchange.sendResponseHeaders(200, response.length());
         OutputStream os = httpExchange.getResponseBody();
