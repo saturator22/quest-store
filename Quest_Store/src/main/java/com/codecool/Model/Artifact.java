@@ -3,11 +3,11 @@ package com.codecool.Model;
 import java.util.Objects;
 
 public class Artifact extends ShopObject {
-    private Integer artifactId;
-    private String name;
-    private Integer price;
-    private String description;
-    private String category;
+    public Integer artifactId;
+    public String name;
+    public Integer price;
+    public String description;
+    public String category;
 
     public void setName(String name) {
         this.name = name;
