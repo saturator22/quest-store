@@ -1,4 +1,4 @@
-package com.codecool.Controller;
+package com.codecool.Handlers;
 
 import com.codecool.Helper.MimeTypeResolver;
 import com.sun.net.httpserver.HttpExchange;
@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
 
-public class StaticController implements HttpHandler {
+public class StaticHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
