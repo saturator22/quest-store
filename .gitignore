@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#target directory
+Quest_Store/target/
+
 # Log file
 *.log
 
