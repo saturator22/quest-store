@@ -3,19 +3,21 @@
 {% block content %}
 <header class="navigationbar">
     <nav>
-        <a style="text-align: left" href="//TODO: what_link">HOME</a>
+        <a style="text-align: left" href="/dashboard">HOME</a>
         <h1>Quest Store</h1>
-        <a href="">Account</a>
+        <a href="/account">Account</a>
     </nav>
 </header>
-<div class="classescontainer">
-    {% for class in classes %}
-    <div class="classbox">
-        <a href="classmanagement.html"> //TODO: GET/POST
-            <img src="pictures/class.jpg"/>
-            <span>{{ class.name }}</span>
-        </a>
+<body>
+    <div class="classescontainer">
+        {% for class in classes %}
+            <div class="classbox">
+                <a href="">
+                    <img src="/static/pictures/class.jpg"/>
+                    <span>{{class.name}}</span>
+                </a>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+</body>
 {% endblock %}
