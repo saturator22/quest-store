@@ -7,6 +7,11 @@ public class Student extends User{
     private String github;
     private Integer balance = 0;
     private Integer earned = 0;
+    private String name;
+
+    public String getName() {
+        return this.getFirstName() + " " + this.getLastName();
+    }
 
     public void setBalance(Integer balance) {
         this.balance = balance;
