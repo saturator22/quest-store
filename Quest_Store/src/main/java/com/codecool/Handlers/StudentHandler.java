@@ -49,6 +49,31 @@ public class StudentHandler implements HttpHandler {
         }
     }
 
+    private boolean buyArtifact(Integer productId, Student activeAccount) {
+        Boolean isSuccesfull = null;
+        ArtifactDAO artifactDAO = new ArtifactDAO();
+        StudentDAO studentDAO = new StudentDAO();
+        Artifact chosenProduct = artifactDAO.getArtifactById(productId);
+        Integer price = chosenProduct.getPrice();
+        Integer balance = activeAccount.getBalance();
+
+        if (balance >= price) {
+            artifactDAO.addArtifactToStudent(chosenProduct, activeAccount.getUserId());
+            balance -= price;
+            activeAccount.setBalance(balance);
+            studentDAO.updateBalance(activeAccount);
+
+            isSuccesfull = true;
+            System.out.println("Shoping succesfull, item has been added!");
+
+        } else {
+            System.out.println("Not enough £££. Complete more quests.");
+            isSuccesfull = false;
+        }
+
+        return isSuccesfull;
+    }
+
 
 
     private List<ShopObject> getAvailableArtifacts() {
