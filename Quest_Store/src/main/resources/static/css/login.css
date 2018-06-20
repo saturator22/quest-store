@@ -1,0 +1,87 @@
+html,
+body {
+    background-image: url("../pictures/gradient/background.jpg") !important;
+}
+
+footer {
+    display: none !important;
+}
+
+input {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: 600px;
+    border: 0px;
+    font-size: 0.7em;
+    padding: 1em;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.submit {
+    text-transform: uppercase;
+}
+::placeholder {
+    color: black;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: black;
+}
+
+::-ms-input-placeholder {
+    color: black;
+}
+
+input[type="email"] {
+    font-size: 1.2em;
+    color: black;
+}
+
+input[type="password"] {
+    font-size: 1.2em;
+    color: black;
+}
+
+input:active {
+    border: none !important;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    padding: 0.5em;
+    line-height: 2em;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    font-weight: 400;
+    border: none;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: while;
+    transition: 0.3s;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: silver;
+    color: #35495e;
+}
+
+
+.form-group>label {
+    text-shadow: 1px 1px 1px black;
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 1.2em;
+    letter-spacing: 0.3em;
+}
+
+.options {
+    margin-top: 10px !important;
+    width: 600px;
+    display: block;
+}

@@ -162,6 +162,35 @@ public class StudentDAO extends UserDAO{
         return false;
     }
 
+    public boolean updateBalance(Student student) {
+        String
+                updateStudentQuery =
+                "UPDATE students\n" +
+                        "SET balance = ?, earned_coolcoins = ?\n" +
+                        "WHERE user_id = ?";
+
+        try{
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(updateStudentQuery);
+
+            preparedStatement.setInt(1, student.getBalance());
+            preparedStatement.setInt(2, student.getEarned());
+            preparedStatement.setInt(3, student.getUserId());
+
+            int updateResult = preparedStatement.executeUpdate();
+
+            if(updateResult == 1) {
+                return true;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
     public boolean insertStudentData(Student student) {
         String
                 insertQuery =

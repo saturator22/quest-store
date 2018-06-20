@@ -10,7 +10,7 @@ CREATE TABLE users (
 	last_name TEXT,
 	login TEXT UNIQUE,
 	email TEXT UNIQUE,
-	password INTEGER
+	password TEXT
 );
 
 CREATE TABLE classes (

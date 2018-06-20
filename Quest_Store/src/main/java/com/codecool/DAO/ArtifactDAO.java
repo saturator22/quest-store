@@ -2,6 +2,7 @@ package com.codecool.DAO;
 
 import com.codecool.Connection.ConnectionBuilder;
 import com.codecool.Model.Artifact;
+import com.codecool.Model.OwnedArtifact;
 import com.codecool.Model.ShopObject;
 import org.postgresql.util.PSQLException;
 
@@ -85,6 +86,18 @@ public class ArtifactDAO {
         return artifact;
     }
 
+    private OwnedArtifact extractOwnedArtifact(ResultSet resultSet) throws SQLException {
+        OwnedArtifact artifact = new OwnedArtifact();
+
+        artifact.setArtifactId(resultSet.getInt("artifact_id"));
+        artifact.setDescription(resultSet.getString("artifact_description"));
+        artifact.setName(resultSet.getString("artifact_name"));
+        artifact.setPrice(resultSet.getInt("artifact_value"));
+        artifact.setCategory(resultSet.getString("artifact_category"));
+        artifact.setUniqueId(resultSet.getInt("unique_id"));
+        return artifact;
+    }
+
     private boolean sendQuestQuery(Artifact artifact, String query) {
         try {
             Connection connection = ConnectionBuilder.getConnection();
@@ -110,7 +123,7 @@ public class ArtifactDAO {
     public List<Artifact> getStudentArtifacts(Integer userId) {
         List<Artifact> studentArtifacts = new ArrayList<>();
 
-        String query = "SELECT artifacts.*, students_artifacts.user_id " +
+        String query = "SELECT artifacts.*, students_artifacts.user_id, students_artifacts.unique_id " +
                 "FROM artifacts JOIN students_artifacts " +
                 "ON students_artifacts.artifact_id = artifacts.artifact_id " +
                 "WHERE students_artifacts.user_id = " + userId;
@@ -121,7 +134,7 @@ public class ArtifactDAO {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                studentArtifacts.add(extractArtifact(resultSet));
+                studentArtifacts.add(extractOwnedArtifact(resultSet));
             }
 
             statement.close();
@@ -142,7 +155,7 @@ public class ArtifactDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, user_id);
             ps.setInt(2, artifact.getArtifactId());
-            ps.setBoolean(3, false);
+            ps.setInt(3, 0);
 
             int i = ps.executeUpdate();
 
@@ -157,5 +170,32 @@ public class ArtifactDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean useArtifact(Integer uniqueId) {
+        String query = "UPDATE public.students_artifacts\n" +
+                "   SET is_used=?\n" +
+                " WHERE unique_id=?;";
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, 1);
+            ps.setInt(2, uniqueId);
+
+            int i = ps.executeUpdate();
+
+            ps.close();
+            connection.close();
+
+            if (i == 1) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
     }
 }
