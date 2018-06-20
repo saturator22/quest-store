@@ -24,17 +24,24 @@ public class AuthHandler implements HttpHandler {
             Session session = Session.getInstance();
             HttpCookie cookie = session.setCookieInHandler(exchange);
 
-            if (method.equals("GET") && !session.isValid(cookie.getValue())) {
-                System.out.println(session.isValid(cookie.getValue()));
+            //TEST/DEBUG ONLY
+//            System.out.println("==== SESSIONS ====");
+//            for (Map.Entry<String, Integer> entry : session.getSessions().entrySet())
+//            {
+//                System.out.println(entry.getKey() + "/" + entry.getValue());
+//            }
+//            System.out.println("==== SESSIONS ====");
 
+            if (method.equals("GET") && !session.isValid(cookie.getValue())) {
                 response = renderView("static/templates/pages/login.twig", "cookie", cookie.getValue().toLowerCase());
                 exchange.sendResponseHeaders(200, response.length());
 
             } else if (method.equals("GET") && session.isValid(cookie.getValue())) {
-                System.out.println(session.isValid(cookie.getValue()));
+                System.out.println("Active session: " + session.isValid(cookie.getValue()));
 
                 String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
-                exchange.getResponseHeaders().set("Location", "http://" + hostPort + "/dashboard");
+                String whereTo = "/dashboard";
+                exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
                 exchange.sendResponseHeaders(301, -1);
             }
 
