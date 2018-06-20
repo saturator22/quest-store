@@ -22,7 +22,7 @@ public class StudentHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        String sessionCookie = httpExchange.getRequestHeaders().getFirst("Cookie");
+//        String sessionCookie = httpExchange.getRequestHeaders().getFirst("Cookie");
 //            TODO : IMPLEMENT SESSION CONTROLLER
         Integer activeUserId = 19;
         Student activeAccount = getActiveAccount(activeUserId);
@@ -92,7 +92,7 @@ public class StudentHandler implements HttpHandler {
     }
 
     private void sendPersonalizedPage(HttpExchange httpExchange, Student activeStudent) throws IOException {
-        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questStore.twig");
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("static/templates/questStore.twig");
         JtwigModel model = JtwigModel.newModel();
         model.with("username", activeStudent.getFirstName() + " " + activeStudent.getLastName());
         model.with("userbalance", activeStudent.getBalance());
