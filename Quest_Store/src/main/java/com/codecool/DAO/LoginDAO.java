@@ -39,6 +39,8 @@ public class LoginDAO {
     public LoginData getLoginData(Integer id) {
         LoginData loginData = null;
 
+        if(id == null) return null;
+
         String query = "SELECT user_id, role_id, login, email, password FROM users WHERE user_id = ?;";
 
         try {
