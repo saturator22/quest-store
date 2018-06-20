@@ -33,8 +33,10 @@ public class Session {
         return this.sessions.containsKey(sessionId);
     }
 
-    public Integer getUserIdBySesssion(HttpExchange exchange) {
-        return this.sessions.get(exchange.getRequestHeaders().getFirst("Cookie"));
+    public Integer getUserIdBySesssion(HttpCookie cookie) {
+        Integer userId = null;
+        userId = this.sessions.get(cookie.getValue());
+        return userId;
     }
 
     public HttpCookie setCookieInHandler(HttpExchange exchange) {
@@ -49,5 +51,9 @@ public class Session {
             exchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
         }
         return cookie;
+    }
+
+    public Map<String, Integer> getSessions() {
+        return this.sessions;
     }
 }
