@@ -74,7 +74,10 @@ public class StudentHandler implements HttpHandler {
         return isSuccesfull;
     }
 
-
+    private Student getActiveAccount(Integer userId) {
+        StudentDAO sdao = new StudentDAO();
+        return sdao.getStudentById(userId);
+    }
 
     private List<ShopObject> getAvailableArtifacts() {
         ArtifactDAO aDAO = new ArtifactDAO();
