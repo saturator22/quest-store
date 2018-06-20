@@ -55,6 +55,32 @@ public class MentorDAO extends UserDAO {
         return classRoom;
     }
 
+    public List<ClassRoom> getClassRooms() {
+        String
+                getMentorsClassesQuery = "SELECT * FROM classes";
+
+        List<ClassRoom> classRooms = new ArrayList<>();
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(getMentorsClassesQuery);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                classRooms.add(extractClassRoomFromRow(resultSet));
+            }
+
+            connection.close();
+            preparedStatement.close();
+
+            return classRooms;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<ClassRoom> getMentorsClasses(Mentor mentor) {
         String
                 getMentorsClassesQuery = "SELECT * FROM classes\n" +
