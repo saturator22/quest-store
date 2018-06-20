@@ -171,4 +171,31 @@ public class ArtifactDAO {
         }
         return false;
     }
+
+    public boolean useArtifact(Integer uniqueId) {
+        String query = "UPDATE public.students_artifacts\n" +
+                "   SET is_used=?\n" +
+                " WHERE unique_id=?;";
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, 1);
+            ps.setInt(2, uniqueId);
+
+            int i = ps.executeUpdate();
+
+            ps.close();
+            connection.close();
+
+            if (i == 1) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
 }
