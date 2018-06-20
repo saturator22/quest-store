@@ -37,7 +37,6 @@ public class AuthHandler implements HttpHandler {
                 exchange.sendResponseHeaders(200, response.length());
 
             } else if (method.equals("GET") && session.isValid(cookie.getValue())) {
-                System.out.println("Active session: " + session.isValid(cookie.getValue()));
 
                 String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
                 String whereTo = "/dashboard";
@@ -97,7 +96,6 @@ public class AuthHandler implements HttpHandler {
             InputStreamReader inputStreamReader = new InputStreamReader(exchange.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(inputStreamReader);
             String formData = br.readLine();
-            System.out.println(formData);
             return parseFormData(formData);
         }
 
