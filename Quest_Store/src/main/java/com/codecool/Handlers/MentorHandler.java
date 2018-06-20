@@ -1,8 +1,10 @@
 package com.codecool.Handlers;
 
 import com.codecool.DAO.MentorDAO;
+import com.codecool.DAO.StudentDAO;
 import com.codecool.Model.ClassRoom;
 import com.codecool.Model.Mentor;
+import com.codecool.Model.Student;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.jtwig.JtwigModel;
@@ -10,6 +12,7 @@ import org.jtwig.JtwigTemplate;
 
 import java.io.*;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,7 @@ public class MentorHandler implements HttpHandler {
         String response = "";
         String method = httpExchange.getRequestMethod();
         String requestURI = httpExchange.getRequestURI().toString();
+        String decodedURI = URLDecoder.decode(requestURI, "UTF-8");
 
         MentorDAO mentorDAO = new MentorDAO();
         Mentor mentor = mentorDAO.getMentorById(21);
@@ -30,16 +34,24 @@ public class MentorHandler implements HttpHandler {
         final String DASHBOARD = "/dashboard";
         final String CLASSES = "/dashboard/classes";
 
+        String lastDirectory = getLastFromURI(decodedURI, CLASSES + "/");
+        String ADD = "/dashboard/classes/" + lastDirectory;
+
         // Send a form if it wasn't submitted yet.
         if(method.equals("GET")){
 
-            switch (requestURI) {
-                case DASHBOARD:
-                    response = getDashboardLayout();
-                    break;
-                case CLASSES:
-                    response = getClassesLayout(classRooms);
-                    break;
+            if(decodedURI.equals(ADD)) {
+                response = getAddLayout(lastDirectory);
+            }
+            else {
+                switch (requestURI) {
+                    case DASHBOARD:
+                        response = getDashboardLayout();
+                        break;
+                    case CLASSES:
+                        response = getClassesLayout(classRooms);
+                        break;
+                }
             }
 
         }
@@ -70,6 +82,26 @@ public class MentorHandler implements HttpHandler {
         os.close();
     }
 
+    private String getAddLayout(String lastDirectory) {
+        String response;
+        StudentDAO studentDAO = new StudentDAO();
+        List<Student> studentList = studentDAO.getStudentsByClassName(lastDirectory);
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("static/templates/layouts/addlayout.twig");
+        JtwigModel model = JtwigModel.newModel();
+
+        model.with("title", "Add Student");
+        model.with("addButtonName", "Add Student");
+        model.with("list", studentList);
+        model.with("functionName", "createForm()");
+        model.with("jsPath", "/static/js/studentform.js");
+
+
+        response = template.render(model);
+
+        return response;
+    }
+
     private String getClassesLayout(List<ClassRoom> classRooms) {
         String response;
 
@@ -77,10 +109,6 @@ public class MentorHandler implements HttpHandler {
         JtwigModel model = JtwigModel.newModel();
 
         model.with("classes", classRooms);
-
-        for(ClassRoom classRoom: classRooms) {
-            System.out.println(classRoom);
-        }
 
         response = template.render(model);
 
@@ -95,6 +123,21 @@ public class MentorHandler implements HttpHandler {
         response = template.render(model);
 
         return response;
+    }
+
+    private String getLastFromURI(String toParse, String splitter) {
+        if(toParse.contains("/dashboard/classes/")) {
+            try {
+                String encodedURL = URLDecoder.decode(toParse, "UTF-8");
+            } catch(UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            String[] pathArray = toParse.split(splitter);
+
+            return pathArray[1];
+        }
+        return null;
     }
 
     /**
