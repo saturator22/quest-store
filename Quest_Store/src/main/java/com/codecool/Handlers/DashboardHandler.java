@@ -27,6 +27,9 @@ public class DashboardHandler implements HttpHandler {
 
         if (method.equals("GET") && session.isValid(cookie.getValue())) {
             String whereTo = "";
+            if (user == null) {
+                whereTo = "/login";
+            }
             switch (user.getRoleId()) {
                 case 1:
                     whereTo = "/admin";
@@ -37,18 +40,18 @@ public class DashboardHandler implements HttpHandler {
                 case 3:
                     whereTo = "/store";
                     break;
-                default:
-                    whereTo = "/login";
-                    break;
             }
             String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
             exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
             exchange.sendResponseHeaders(301, -1);
         }
+//        if (method.equals("GET") && !session.isValid(cookie.getValue())) {
+//            String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
+//            String whereTo = "/login";
+//            exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
+//            exchange.sendResponseHeaders(301, -1);
+//        }
 
-        String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
-        exchange.getResponseHeaders().set("Location", "http://" + hostPort + "/login");
-        exchange.sendResponseHeaders(301, -1);
 
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
