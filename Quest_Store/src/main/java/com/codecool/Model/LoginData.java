@@ -1,9 +1,17 @@
 package com.codecool.Model;
 
 public class LoginData {
-    private Integer userId = null;
-    private Integer roleId = null;
-    private String login = null;
+    private Integer userId;
+    private Integer roleId;
+    private String login;
+    private String password;
+
+    public LoginData(Integer userId, Integer roleId, String login, String password) {
+        this.userId = userId;
+        this.roleId = roleId;
+        this.login = login;
+        this.password = password;
+    }
 
     public String getLogin() {
         return login;
@@ -17,6 +25,7 @@ public class LoginData {
         return userId;
     }
 
+
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
@@ -27,5 +36,18 @@ public class LoginData {
 
     public Integer getRoleId() {
         return roleId;
+    }
+
+    @Override
+    public String toString() {
+        return this.userId + " " + this.login + " " + this.roleId + " " + this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 }

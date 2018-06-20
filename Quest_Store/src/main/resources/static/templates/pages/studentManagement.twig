@@ -1,0 +1,23 @@
+{% extends "../layouts/mentorAdminLayout.twig" %}
+{% block title %}Class Management{% endblock %}
+{% block content %}
+<header class="navigationbar">
+    <nav>
+        <a style="text-align: left" href="/dashboard">HOME</a>
+        <h1>Quest Store</h1>
+        <a href="/account">Account</a>
+    </nav>
+</header>
+<body>
+    <div class="classescontainer">
+        {% for class in classes %}
+            <div class="classbox">
+                <a href="">
+                    <img src="/static/pictures/class.jpg"/>
+                    <span>{{class.name}}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}
