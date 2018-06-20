@@ -1,8 +1,8 @@
 <html lang="en">
     <head>
-        <title>Mentor</title>
-        <link rel="stylesheet" type="text/css" href="{{cssPath}}" media="screen">
-        <link rel="stylesheet" type="text/css" href="{{cssPath2}}" media="screen">
+        <title>{{title}}</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/mentor.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/static/css/students.css" media="screen">
         <!-- <link href="https://fonts.googleapis.com/css?family=Jua|Metal+Mania" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Jua|Metal+Mania|Pacifico" rel="stylesheet">
     </head>
@@ -10,13 +10,13 @@
         <body>
             <header class="navigationbar">
                 <nav>
-                    <a style="text-align: left" href="{{homePath}}">HOME</a>
+                    <a style="text-align: left" href="/dashboard">HOME</a>
                     <h1>Quest Store</h1>
                     <a href="">Account</a>
                 </nav>
             </header>
             <div id="addbutton" class="addbutton animate">
-                <button onclick="createClassForm()" id="addstudent">{{addButtonName}}</button>
+                <button onclick="{{functionName}}" id="addstudent">{{addButtonName}}</button>
             </div>
             <div id="studentsform">
                 <form id="form_tag" name="form">
@@ -25,10 +25,9 @@
                 <div id="add"></div>
                 </form>
                 <div class="studentscontainer animate">
-
-                    {% for element in elementsList %}
+                    {% for element in list %}
                         <div class="studentsbox">
-                            <a href="">{{element}}</a>
+                            <a href="">{{element.name}}</a>
                         </div>
                     {% endfor %}
                 </div>
