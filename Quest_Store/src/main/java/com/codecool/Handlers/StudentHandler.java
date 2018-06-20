@@ -26,6 +26,7 @@ public class StudentHandler implements HttpHandler {
 //            TODO : IMPLEMENT SESSION CONTROLLER
         Integer activeUserId = 19;
         Student activeAccount = getActiveAccount(activeUserId);
+
         final String GET_METHOD = "GET";
         final String POST_METHOD = "POST";
 
@@ -46,7 +47,19 @@ public class StudentHandler implements HttpHandler {
                 buyArtifact(productId, activeAccount);
                 sendPersonalizedPage(httpExchange, activeAccount);
             }
+
+            if (request[0].equals("use")) {
+                Integer productId = Integer.valueOf(request[1]);
+                useArtifact(productId);
+                sendPersonalizedPage(httpExchange, activeAccount);
+            }
         }
+    }
+
+    private boolean useArtifact(Integer uniqueId) {
+        ArtifactDAO artifactDAO = new ArtifactDAO();
+        Boolean result = artifactDAO.useArtifact(uniqueId);
+        return result;
     }
 
     private boolean buyArtifact(Integer productId, Student activeAccount) {
@@ -87,7 +100,7 @@ public class StudentHandler implements HttpHandler {
 
     private List<Artifact> getOwnedArtifacts(Integer studentId) {
         ArtifactDAO aDAO = new ArtifactDAO();
-        List<Artifact> studentInventory = new ArrayList<>(aDAO.getStudentArtifacts(studentId));
+        List<Artifact> studentInventory = aDAO.getStudentArtifacts(studentId);
         return studentInventory;
     }
 
