@@ -1,0 +1,6 @@
+﻿CREATE TABLE students_artifacts (
+  unique_id SERIAL PRIMARY KEY,
+	user_id INTEGER NOT NULL REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	artifact_id INTEGER NOT NULL REFERENCES artifacts(artifact_id) ON UPDATE CASCADE,
+	is_used INTEGER DEFAULT 0
+);
