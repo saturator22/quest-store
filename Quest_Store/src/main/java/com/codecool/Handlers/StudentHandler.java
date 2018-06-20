@@ -10,7 +10,9 @@ import com.sun.net.httpserver.HttpHandler;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpCookie;
 import java.util.ArrayList;
@@ -20,21 +22,34 @@ public class StudentHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+        String sessionCookie = httpExchange.getRequestHeaders().getFirst("Cookie");
+//            TODO : IMPLEMENT SESSION CONTROLLER
+        Integer activeUserId = 19;
+        Student activeAccount = getActiveAccount(activeUserId);
         final String GET_METHOD = "GET";
         final String POST_METHOD = "POST";
+
         String method = httpExchange.getRequestMethod();
 
         if (method.equals(GET_METHOD)) {
-            String sessionCookie = httpExchange.getRequestHeaders().getFirst("Cookie");
-            sendPersonalizedPage(httpExchange);
+            sendPersonalizedPage(httpExchange, activeAccount);
         }
 
         if (method.equals(POST_METHOD)) {
-            sendPersonalizedPage(httpExchange);
-        }
+            InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
+            BufferedReader br = new BufferedReader(isr);
+            String requestData = br.readLine();
+            String[] request = requestData.split("=");
 
-        sendPersonalizedPage(httpExchange);
+            if (request[0].equals("buy")) {
+                Integer productId = Integer.valueOf(request[1]);
+                buyArtifact(productId, activeAccount);
+                sendPersonalizedPage(httpExchange, activeAccount);
+            }
+        }
     }
+
+
 
     private List<ShopObject> getAvailableArtifacts() {
         ArtifactDAO aDAO = new ArtifactDAO();
@@ -48,17 +63,13 @@ public class StudentHandler implements HttpHandler {
         return studentInventory;
     }
 
-    private void sendPersonalizedPage(HttpExchange httpExchange) throws IOException {
-        StudentDAO sDAO = new StudentDAO();
-        Integer userId = 19;
-        Student activeStudent = sDAO.getStudentById(userId);
-//        Integer userId = sessionsUsers.get(sessionId);
+    private void sendPersonalizedPage(HttpExchange httpExchange, Student activeStudent) throws IOException {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/questStore.twig");
         JtwigModel model = JtwigModel.newModel();
         model.with("username", activeStudent.getFirstName() + " " + activeStudent.getLastName());
         model.with("userbalance", activeStudent.getBalance());
         model.with("userlevel", activeStudent.getLevelId());
-        model.with("ownedcards", getOwnedArtifacts(userId));
+        model.with("ownedcards", getOwnedArtifacts(activeStudent.getUserId()));
         model.with("availablecards", getAvailableArtifacts());
         String response = template.render(model);
         httpExchange.sendResponseHeaders(200, response.length());
