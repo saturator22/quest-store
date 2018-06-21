@@ -145,7 +145,7 @@ public class StudentDAO extends UserDAO{
             preparedStatement.setString(2, student.getFirstName());
             preparedStatement.setString(3, student.getLastName());
             preparedStatement.setString(4, student.getLogin());
-            preparedStatement.setInt(5, student.getPassword());
+            preparedStatement.setString(5, student.getPassword());
             preparedStatement.setString(6, student.getEmail());
             preparedStatement.setInt(7, student.getUserId());
 
@@ -210,7 +210,7 @@ public class StudentDAO extends UserDAO{
             preparedStatement.setString(3, student.getLastName());
             preparedStatement.setString(4, student.getLogin());
             preparedStatement.setString(5, student.getEmail());
-            preparedStatement.setInt(6, student.getPassword());
+            preparedStatement.setString(6, student.getPassword());
             preparedStatement.setString(7, student.getLogin());
             preparedStatement.setInt(8, student.getClassId());
             preparedStatement.setInt(9, student.getLevelId());

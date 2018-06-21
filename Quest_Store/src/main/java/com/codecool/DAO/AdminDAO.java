@@ -22,7 +22,7 @@ public class AdminDAO extends UserDAO {
         admin.setFirstName(resultSet.getString("first_name"));
         admin.setLastName(resultSet.getString("last_name"));
         admin.setLogin(resultSet.getString("login"));
-        admin.setPassword(resultSet.getInt("password"));
+        admin.setPassword(resultSet.getString("password"));
         admin.setEmail(resultSet.getString("email"));
 
         return admin;
