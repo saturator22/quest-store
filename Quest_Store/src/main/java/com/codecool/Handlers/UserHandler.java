@@ -70,7 +70,7 @@ public class UserHandler implements HttpHandler {
 //            }
             QSHelper.redirect(exchange, "/user");
         }
-        if (method.equals("PUT") && !session.isValid(cookie.getValue())) {
+        if (method.equals("POST") && !session.isValid(cookie.getValue())) {
             exchange.sendResponseHeaders(401, -1);
         }
         OutputStream os = exchange.getResponseBody();
