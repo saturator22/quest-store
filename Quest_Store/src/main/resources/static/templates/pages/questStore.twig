@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/questStore.css" />
+
 </head>
 
 <body onload="filterSelection('all');">
@@ -57,18 +58,31 @@
 
       <section>
         <div id="inventory">
+        {% if ownedcards | length < 1 %}
+            <h1 class="inventory-message">You haven't got any artifacts yet. Get some now!</h1>
+        {% endif %}
         {% for card in ownedcards %}
 
         <div class="card all {{card.category}}">
           <div class="card-container">
             <h2 class="card-header">{{card.name}}</h2>
             <h3 class="card-price">${{card.price}}</h3>
-            <img class="card-picture" src="static/pictures/cards/combat-training.png" alt="Combat training">
+            <img class="card-picture" src="static/pictures/cards/{{card.artifactId}}.png" alt="{{card.name}}">
             <h3 class="card-description">{{card.description}}</h3>
           </div>
 
           <div class="buy-button">
-            <h2 id="buy-button">use artifact</h2>
+
+          {% if card.status == 0 %}
+            <form action="" method="post">
+            <button class="buy-btn" name="use" value={{card.uniqueId}}>use artifact</button>
+            </form>
+          {% elseif card.status == 1 %}
+            <h2 class="yellow-btn">waiting for approval</h2>
+          {% elseif card.status == 2 %}
+            <h2 class="red-btn">artifact used</h2>
+          {% endif %}
+
           </div>
         </div>
         {% endfor %}
@@ -81,15 +95,19 @@
         <div class="card all {{card.category}}">
           <div class="card-container">
             <h2 class="card-header">{{card.name}}</h2>
-            <h3 class="card-price">{{card.price}}</h3>
-            <img class="card-picture" src="static/pictures/cards/combat-training.png" alt="Combat training">
+            <h3 class="card-price">${{card.price}}</h3>
+            <img class="card-picture" src="static/pictures/cards/{{card.artifactId}}.png" alt="{{card.name}}">
             <h3 class="card-description">{{card.description}}</h3>
           </div>
 
           <div class="buy-button">
+          {% if userbalance >= card.price %}
             <form action="" method="post">
-            <button name="buy" value={{card.artifactId}}>get artifact</button>
+            <button class="buy-btn" name="buy" value={{card.artifactId}}>get artifact</button>
             </form>
+          {% else %}
+            <h2 class="red-btn">insufficient funds</h2>
+          {% endif %}
           </div>
         </div>
         {% endfor %}
