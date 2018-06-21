@@ -1,6 +1,7 @@
 package com.codecool.Handlers;
 
 import com.codecool.DAO.LoginDAO;
+import com.codecool.Helper.QSHelper;
 import com.codecool.Model.LoginData;
 import com.codecool.Model.Session;
 import com.sun.net.httpserver.HttpExchange;
@@ -31,10 +32,7 @@ public class DashboardHandler implements HttpHandler {
         }
 
         if (user == null && method.equals("GET") && !session.isValid(cookie.getValue())) {
-            String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
-            String whereTo = "/login";
-            exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
-            exchange.sendResponseHeaders(301, -1);
+            QSHelper.redirect(exchange, "/login");
         }
 
         if (method.equals("GET") && session.isValid(cookie.getValue())) {
@@ -53,9 +51,7 @@ public class DashboardHandler implements HttpHandler {
                     whereTo = "/store";
                     break;
             }
-            String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
-            exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
-            exchange.sendResponseHeaders(301, -1);
+            QSHelper.redirect(exchange, whereTo);
         }
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
