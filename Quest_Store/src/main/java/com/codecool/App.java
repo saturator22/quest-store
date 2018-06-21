@@ -21,7 +21,7 @@ public class App {
         server.createContext("/static", new StaticHandler());
         server.createContext("/questStore", new StudentHandler());
         server.createContext("/ajaxrequest", new AjaxHandler());
-        server.createContext("/mentorShop", new MentorShopHandler());
+//        server.createContext("/mentorShop", new MentorShopHandler());
         server.setExecutor(null); // creates a default executor
         // start listening
         server.start();
