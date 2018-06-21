@@ -1,8 +1,7 @@
-﻿CREATE TABLE roles (
+CREATE TABLE roles (
 	role_id SERIAL PRIMARY KEY,
 	role_name TEXT
 );
-
 CREATE TABLE users (
 	user_id SERIAL PRIMARY KEY,
 	role_id INTEGER NOT NULL REFERENCES roles(role_id),
@@ -12,17 +11,17 @@ CREATE TABLE users (
 	email TEXT UNIQUE,
 	password TEXT
 );
-
+CREATE TABLE mentors (
+	user_id INTEGER NOT NULL REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
 CREATE TABLE classes (
 	class_id SERIAL PRIMARY KEY,
 	class_name TEXT
 );
-
 CREATE TABLE levels (
 	level_id SERIAL PRIMARY KEY,
 	level_req_balance INTEGER
 );
-
 CREATE TABLE students (
 	user_id INTEGER NOT NULL REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 	class_id INTEGER NOT NULL REFERENCES classes(class_id) ON UPDATE CASCADE,
@@ -55,18 +54,14 @@ CREATE TABLE artifacts (
 );
 
 CREATE TABLE students_artifacts (
+  	unique_id SERIAL PRIMARY KEY,
 	user_id INTEGER NOT NULL REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 	artifact_id INTEGER NOT NULL REFERENCES artifacts(artifact_id) ON UPDATE CASCADE,
-	is_used BOOLEAN DEFAULT FALSE,
-	PRIMARY KEY(user_id, artifact_id)
-);
-
-CREATE TABLE mentors (
-	user_id INTEGER NOT NULL REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+	is_used INTEGER DEFAULT 0
 );
 
 CREATE TABLE mentors_classes (
 	user_id INTEGER NOT NULL REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 	class_id INTEGER NOT NULL REFERENCES classes(class_id) ON UPDATE CASCADE,
 	PRIMARY KEY(user_id, class_id)
-);	
+);
