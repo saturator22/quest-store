@@ -14,22 +14,21 @@ body {
     <nav>
         <h1>Quest Store</h1>
         <a href="">Account</a>
+        <form action="/login" method="POST">
+            <button action="submit">Logout</button>
+        </form>
     </nav>
 </header>
 <div class="contentbox">
-    <form action="/user" method="PUT">
+    <form action="/user" method="POST">
         <label class="form-group">E-Mail</label>
-        <input class="form" type="text" name="email" value="{{ user.email }}">
+        <input class="form" type="text" name="email" value="{{ user.email }}" required>
         <label class="form-group">Name </label>
-        <input class="form" type="text" name="firstName" value="{{ user.firstName }}">
+        <input class="form" type="text" name="firstName" value="{{ user.firstName }}" required>
         <label class="form-group">Last Name</label>
-        <input class="form" type="text" name="lastName" value="{{ user.lastName }}">
-        <label class="form-group">Github </label>
-        <input class="form" type="text" name="firstName" value="{{ user.github }}">
-        <label class="form-group">New password <small>(optional)</small></label>
-        <input class="form" type="password" name="password">
+        <input class="form" type="text" name="lastName" value="{{ user.lastName }}" required>
         <label class="form-group">Password</label>
-        <input class="form" type="password" name="password">
+        <input class="form" type="password" name="oldPassword" required>
         <button type="submit">Update</button>
     </form>
 </div>
