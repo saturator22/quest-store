@@ -37,8 +37,9 @@ public abstract class UserDAO implements DAO{
             preparedStatement.setString(2, user.getFirstName());
             preparedStatement.setString(3, user.getLastName());
             preparedStatement.setString(4, user.getLogin());
-            preparedStatement.setInt(5, user.getPassword());
+            preparedStatement.setString(5, user.getPassword());
             preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setInt(7, user.getUserId());
 
             int executeResult = preparedStatement.executeUpdate();
             System.out.println(executeResult);
@@ -89,7 +90,7 @@ public abstract class UserDAO implements DAO{
             preparedStatement.setString(3, user.getLastName());
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setString(5, user.getEmail());
-            preparedStatement.setInt(6, user.getPassword());
+            preparedStatement.setString(6, user.getPassword());
 
             if(user.getRoleId() != null) {
                 preparedStatement.setInt(1, user.getRoleId());
