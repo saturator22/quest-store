@@ -20,6 +20,43 @@ public class StudentDAO extends UserDAO{
                             "JOIN users\n" +
                             "ON users.user_id = students.user_id;";
 
+    public List<Student> getStudentsByClassName(String className) {
+        String
+                findByIdQuery = "SELECT users.user_id, role_id, first_name, last_name, login, email, password, " +
+                "students.class_id, level_id, github, balance, earned_coolcoins\n" +
+                "FROM students\n" +
+                "JOIN users\n" +
+                "ON users.user_id = students.user_id\n" +
+                "JOIN classes\n" +
+                "ON students.class_id = classes.class_id\n"+
+                "WHERE classes.class_name = ?;";
+
+        List<Student> studentsList = new ArrayList<>();
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(findByIdQuery);
+
+            preparedStatement.setString(1, className);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                studentsList.add(extractUserFromRow(resultSet));
+            }
+
+            preparedStatement.close();
+            connection.close();
+
+            return studentsList;
+
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
    public Student getStudentById(Integer id) {
         String

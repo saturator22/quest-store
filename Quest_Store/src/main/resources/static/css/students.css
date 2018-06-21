@@ -69,6 +69,7 @@
     line-height: 2em;
     min-width: 25%;
     max-width: 50%;
+    text-align: center;
     /* display: flex; */
     flex-wrap: wrap;
     /* justify-content: center; */

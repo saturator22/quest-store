@@ -52,18 +52,36 @@ function createFormColumns(name) {
     row.appendChild(column75);
 
     if(name === "Class") {
-        let classes = ["KRK 2017.3", "KRK 2017.11"];
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:8000/ajaxrequest');
+        xhr.send(null);
+
         let select = document.createElement("select");
         select.setAttribute("id", name);
         select. setAttribute("name", name);
         column75.appendChild(select)
 
-        for(id = 0; id < classes.length; id++) {
-            let option = document.createElement("option");
-            option.setAttribute("value", classes[id]);
-            option.innerHTML = classes[id];
-            select.appendChild(option);
-        }
+        xhr.onreadystatechange = function () {
+          var DONE = 4; // readyState 4 means the request is done.
+          var OK = 200; // status 200 is a successful return.
+
+
+          if (xhr.readyState === DONE) {
+            if (xhr.status === OK)
+              console.log(xhr.responseText); // 'This is the returned text.'
+              var jsonData = JSON.parse(xhr.responseText);
+              for (var i = 0; i < jsonData.length; i++) {
+                  var counter = jsonData[i];
+                    let option = document.createElement("option");
+                    option.setAttribute("value", counter.name);
+                    option.innerHTML = counter.name;
+                    select.appendChild(option);
+              }
+            } else {
+              console.log('Error: ' + xhr.status); // An error occurred during the request.
+            }
+        };
+
     } else {
         let input = document.createElement("input");
         input.setAttribute("type", "text");
