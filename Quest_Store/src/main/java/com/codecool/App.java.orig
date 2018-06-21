@@ -14,15 +14,19 @@ public class App {
         // set routes
         server.createContext("/", new DashboardHandler());
         server.createContext("/dashboard", new DashboardHandler());
-        server.createContext("/store", new StudentHandler());
+<<<<<<< HEAD
+        server.createContext("/store", new StoreHandler());
         server.createContext("/user", new UserHandler());
+=======
+        server.createContext("/store", new StudentHandler());
+>>>>>>> 7b0c7d43b11c61cf3359bc15b6a1f506a96d09be
         server.createContext("/login", new AuthHandler());
         server.createContext("/admin", new AdminHandler());
         server.createContext("/mentor", new MentorHandler());
         server.createContext("/static", new StaticHandler());
         server.createContext("/questStore", new StudentHandler());
         server.createContext("/ajaxrequest", new AjaxHandler());
-//        server.createContext("/mentorShop", new MentorShopHandler());
+        server.createContext("/mentorShop", new MentorShopHandler());
         server.setExecutor(null); // creates a default executor
         // start listening
         server.start();
