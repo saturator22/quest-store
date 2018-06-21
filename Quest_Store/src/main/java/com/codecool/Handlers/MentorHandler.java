@@ -4,6 +4,7 @@ import com.codecool.DAO.MentorDAO;
 import com.codecool.DAO.StudentDAO;
 import com.codecool.Model.ClassRoom;
 import com.codecool.Model.Mentor;
+import com.codecool.Model.Session;
 import com.codecool.Model.Student;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -11,7 +12,9 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.io.*;
+import java.net.HttpCookie;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,17 +29,21 @@ public class MentorHandler implements HttpHandler {
         String requestURI = httpExchange.getRequestURI().toString();
         String decodedURI = URLDecoder.decode(requestURI, "UTF-8");
 
+        Session session = Session.getInstance();
+        HttpCookie cookie = session.setCookieInHandler(httpExchange);
+
         MentorDAO mentorDAO = new MentorDAO();
-        Mentor mentor = mentorDAO.getMentorById(21);
+        Mentor mentor = mentorDAO.getMentorById(session.getUserIdBySesssion(cookie));
         List<ClassRoom> classRooms = mentorDAO.getMentorsClasses(mentor);
 
-        final String DASHBOARD = "/dashboard";
-        final String CLASSES = "/dashboard/classes";
+        final String DASHBOARD = "/mentor";
+        final String CLASSES = "/mentor/classes";
 
         String lastDirectory = getLastFromURI(decodedURI, CLASSES + "/");
-        String ADD = "/dashboard/classes/" + lastDirectory;
+        String ADD = "/mentor/classes/" + lastDirectory;
 
         // Send a form if it wasn't submitted yet.
+
         if(method.equals("GET")){
 
             if(decodedURI.equals(ADD)) {
@@ -52,33 +59,48 @@ public class MentorHandler implements HttpHandler {
                         break;
                 }
             }
-
         }
 
         // If the form was submitted, retrieve it's content.
-//        if(method.equals("POST")){
-//            InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
-//            BufferedReader br = new BufferedReader(isr);
-//            String formData = br.readLine();
-//
-//            System.out.println(formData);
-//            Map inputs = parseFormData(formData);
-//
-//            Post post = new Post(inputs.get("Message").toString(), inputs.get("Name").toString(),
-//                    inputs.get("Email").toString(), null);
-//
-//            System.out.println(post.email);
-//            System.out.println(post.name);
-//            System.out.println(post.message);
-//
-//            postDao.insertPost(post);
-//
-//        }
+        if(method.equals("POST")){
+
+            InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
+            BufferedReader br = new BufferedReader(isr);
+            String formData = br.readLine();
+
+            Map inputs = parseFormData(formData);
+
+            StudentDAO studentDAO = new StudentDAO();
+
+            Student student = new Student();
+
+            student.setFirstName(inputs.get("Name").toString());
+            student.setRoleId(3);
+            student.setLevelId(1);
+            student.setLastName(inputs.get("Last+Name").toString());
+            student.setLogin(inputs.get("Login").toString());
+            student.setEmail(inputs.get("Email").toString());
+            student.setPassword(inputs.get("Password").toString());
+            student.setClassId(getClassId(classRooms, inputs.get("Class").toString()));
+
+            studentDAO.insertStudentData(student);
+
+            response = getAddLayout(lastDirectory);
+        }
 
         httpExchange.sendResponseHeaders(200, response.length());
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
+    }
+
+    public Integer getClassId(List<ClassRoom> classesList, String className){
+        for(ClassRoom classRoom: classesList) {
+            if(classRoom.getName().equals(className)) {
+                return classRoom.getClassId();
+            }
+        }
+        return null;
     }
 
     private String getAddLayout(String lastDirectory) {
@@ -94,7 +116,6 @@ public class MentorHandler implements HttpHandler {
         model.with("list", studentList);
         model.with("functionName", "createForm()");
         model.with("jsPath", "/static/js/studentform.js");
-
 
         response = template.render(model);
 
@@ -120,12 +141,11 @@ public class MentorHandler implements HttpHandler {
         JtwigTemplate template = JtwigTemplate.classpathTemplate("static/templates/pages/mentor.twig");
         JtwigModel model = JtwigModel.newModel();
         response = template.render(model);
-
         return response;
     }
 
     private String getLastFromURI(String toParse, String splitter) {
-        if(toParse.contains("/dashboard/classes/")) {
+        if(toParse.contains("/mentor/classes/")) {
             try {
                 String encodedURL = URLDecoder.decode(toParse, "UTF-8");
             } catch(UnsupportedEncodingException e) {

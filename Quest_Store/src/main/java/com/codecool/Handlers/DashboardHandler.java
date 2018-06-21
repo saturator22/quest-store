@@ -21,7 +21,6 @@ public class DashboardHandler implements HttpHandler {
 
         LoginDAO dao = new LoginDAO();
         Integer userId = session.getUserIdBySesssion(cookie);
-        System.out.println(userId);
         LoginData user = null;
         user = dao.getLoginData(userId);
 
