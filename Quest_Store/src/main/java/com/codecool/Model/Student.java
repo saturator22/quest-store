@@ -60,6 +60,7 @@ public class Student extends User{
                 ", roleId=" + getRoleId() +
                 ", firstName=" +getFirstName() +
                 ", lastName=" + getLastName() +
+                ", login=" + getLogin() +
                 ", email=" + getEmail() +
                 ", classId=" + classId +
                 ", levelId=" + levelId +

@@ -7,7 +7,11 @@ footer {
     display: none !important;
 }
 
-input {
+.contentbox {
+    margin-top: 0 !important;
+}
+
+.form {
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     font-weight: 600px;
@@ -18,19 +22,8 @@ input {
     margin-bottom: 2em;
 }
 
-.submit {
-    text-transform: uppercase;
-}
-::placeholder {
-    color: black;
-    opacity: 1;
-}
-
-:-ms-input-placeholder {
-    color: black;
-}
-
-::-ms-input-placeholder {
+input[type="text"] {
+    font-size: 1.2em;
     color: black;
 }
 
@@ -43,6 +36,24 @@ input[type="password"] {
     font-size: 1.2em;
     color: black;
 }
+
+.submit {
+    text-transform: uppercase;
+}
+/*::placeholder {
+    color: black;
+    opacity: 1;
+}*/
+
+/*:-ms-input-placeholder {
+    color: black;
+}
+
+::-ms-input-placeholder {
+    color: black;
+}*/
+
+
 
 input:active {
     border: none !important;

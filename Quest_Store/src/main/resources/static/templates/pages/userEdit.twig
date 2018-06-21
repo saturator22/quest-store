@@ -1,0 +1,36 @@
+{% extends "../layouts/mentorAdminLayout.twig" %} {% block title %}Password change{% endblock %} {% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/login.css" media="screen">
+<style>
+body {
+    background: url("../../static/pictures/background.jpg") !important;
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+{% endblock %} {% block content %}
+<header class="navigationbar">
+    <nav>
+        <h1>Quest Store</h1>
+        <a href="/user" style="margin-rigth: 10px;">Account</a>
+        <form name="submitForm" method="POST" action="/login">
+            <input type="hidden" name="param1" value="param1Value">
+            <a class="nav" href="javascript:document.submitForm.submit()">Sign out</a>
+        </form>
+    </nav>
+</header>
+<div class="contentbox">
+    <form action="/user" method="POST">
+        <label class="form-group">E-Mail</label>
+        <input class="form" type="text" name="email" value="{{ user.email }}" required>
+        <label class="form-group">Name </label>
+        <input class="form" type="text" name="firstName" value="{{ user.firstName }}" required>
+        <label class="form-group">Last Name</label>
+        <input class="form" type="text" name="lastName" value="{{ user.lastName }}" required>
+        <label class="form-group">Password</label>
+        <input class="form" type="password" name="oldPassword" required>
+        <button type="submit">Update</button>
+    </form>
+</div>
+{% endblock %}

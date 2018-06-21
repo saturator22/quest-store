@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminDAO extends UserDAO {
 
@@ -14,7 +16,7 @@ public class AdminDAO extends UserDAO {
         return addUserData(mentor);
     }
 
-     public User extractUserFromRow(ResultSet resultSet) throws SQLException{
+    public User extractUserFromRow(ResultSet resultSet) throws SQLException {
         Admin admin = new Admin();
 
         admin.setUserId(resultSet.getInt("user_id"));
@@ -22,7 +24,7 @@ public class AdminDAO extends UserDAO {
         admin.setFirstName(resultSet.getString("first_name"));
         admin.setLastName(resultSet.getString("last_name"));
         admin.setLogin(resultSet.getString("login"));
-        admin.setPassword(resultSet.getInt("password"));
+        admin.setPassword(resultSet.getString("password"));
         admin.setEmail(resultSet.getString("email"));
 
         return admin;
@@ -43,7 +45,9 @@ public class AdminDAO extends UserDAO {
             ps.close();
             connection.close();
 
-            if (insertSuccessful) { return true; }
+            if (insertSuccessful) {
+                return true;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,15 +71,44 @@ public class AdminDAO extends UserDAO {
             ps.close();
             connection.close();
 
-            if (insertSuccessful) { return true; }
+            if (insertSuccessful) {
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return insertSuccessful;
     }
 
+    public List <Level> getLevels() {
+        List <Level> levels = new ArrayList <>();
+        String query = "SELECT * FROM levels;";
+
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Level level = new Level();
+                level.setLevelId(rs.getInt("level_id"));
+                level.setLevelRequiredBalance(rs.getInt("level_req_balance"));
+                levels.add(level);
+            }
+
+            ps.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return levels;
+    }
+
     private boolean executeSuccessful(int intValue) {
-        if (intValue == 1) { return true; }
+        if (intValue == 1) {
+            return true;
+        }
         return false;
     }
 }
