@@ -15,6 +15,7 @@ public class App {
         server.createContext("/", new DashboardHandler());
         server.createContext("/dashboard", new DashboardHandler());
         server.createContext("/store", new StoreHandler());
+        server.createContext("/user", new UserHandler());
         server.createContext("/login", new AuthHandler());
         server.createContext("/admin", new AdminHandler());
         server.createContext("/mentor", new MentorHandler());
