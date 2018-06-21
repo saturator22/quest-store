@@ -65,7 +65,6 @@ function createFormColumns(name) {
           var DONE = 4; // readyState 4 means the request is done.
           var OK = 200; // status 200 is a successful return.
 
-
           if (xhr.readyState === DONE) {
             if (xhr.status === OK)
               console.log(xhr.responseText); // 'This is the returned text.'
@@ -102,7 +101,7 @@ function closeForm() {
     let form = document.getElementById("form");
     form.style = "display:none";
 
-    event.preventDefault();
+//    event.preventDefault();
 }
 
 function addSaveButton() {
@@ -112,9 +111,10 @@ function addSaveButton() {
 
     let button = document.createElement("button");
     button.setAttribute("id", "process");
+    button.setAttribute("type", "submit");
     button.style.borderRadius = "5%";
     button.innerHTML = "Save";
-    button.addEventListener('click', closeForm);
+//    button.addEventListener('click', closeForm);
     add.appendChild(button);
     
 }

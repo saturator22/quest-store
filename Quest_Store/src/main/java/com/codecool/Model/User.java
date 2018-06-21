@@ -7,7 +7,7 @@ public abstract class User {
     private String lastName;
     private String login;
     private String email;
-    private Integer password;
+    private String password;
 
     public Integer getUserId() {
         return this.userId;
@@ -57,11 +57,11 @@ public abstract class User {
         this.email = email;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    public void setPassword (Integer password) {
+    public void setPassword (String password) {
         this.password = password;
     }
 
