@@ -44,31 +44,37 @@ public class StudentHandler implements HttpHandler {
 
         String method = httpExchange.getRequestMethod();
 
-        if (method.equals("GET") && session.isValid(cookie.getValue())) {
+        if (method.equals(GET_METHOD) && session.isValid(cookie.getValue())) {
             if (activeAccount != null) {
                 sendPersonalizedPage(httpExchange, activeAccount);
             } else if (activeAccount == null) {
                 QSHelper.redirect(httpExchange, "/login");
             }
         }
-        
-        if (method.equals(POST_METHOD)) {
-            InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
-            BufferedReader br = new BufferedReader(isr);
-            String requestData = br.readLine();
-            String[] request = requestData.split("=");
 
-            if (request[0].equals("buy")) {
-                Integer productId = Integer.valueOf(request[1]);
-                buyArtifact(productId, activeAccount);
-                sendPersonalizedPage(httpExchange, activeAccount);
+        if (method.equals(POST_METHOD) && session.isValid(cookie.getValue())) {
+            if (activeAccount != null) {
+                InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
+                BufferedReader br = new BufferedReader(isr);
+                String requestData = br.readLine();
+                String[] request = requestData.split("=");
+
+                if (request[0].equals("buy")) {
+                    Integer productId = Integer.valueOf(request[1]);
+                    buyArtifact(productId, activeAccount);
+                    sendPersonalizedPage(httpExchange, activeAccount);
+                }
+
+                if (request[0].equals("use")) {
+                    Integer productId = Integer.valueOf(request[1]);
+                    useArtifact(productId);
+                    sendPersonalizedPage(httpExchange, activeAccount);
+                }
+                
+            } else if (activeAccount == null) {
+                QSHelper.redirect(httpExchange, "/login");
             }
 
-            if (request[0].equals("use")) {
-                Integer productId = Integer.valueOf(request[1]);
-                useArtifact(productId);
-                sendPersonalizedPage(httpExchange, activeAccount);
-            }
         }
     }
 
