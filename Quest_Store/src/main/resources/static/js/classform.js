@@ -23,7 +23,7 @@ function hideAddButton() {
 }
 
 function createFormElements() {
-    let rowNames = ["Class name"];
+    let rowNames = ["name"];
     
     for(index = 0; index < rowNames.length; index++) {
         let name = rowNames[index];
@@ -84,7 +84,7 @@ function closeForm() {
     let form = document.getElementById("form");
     form.style = "display:none";
 
-    event.preventDefault();
+    // event.preventDefault();
 }
 
 function addSaveButton() {
@@ -95,7 +95,8 @@ function addSaveButton() {
     let button = document.createElement("button");
     button.setAttribute("id", "process");
     button.style.borderRadius = "5%";
+    button.setAttribute("type", "submit");
     button.innerHTML = "Save";
-    button.addEventListener('click', closeForm);
+    // button.addEventListener('click', closeForm);
     add.appendChild(button);
 }
