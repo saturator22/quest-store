@@ -2,9 +2,8 @@ package com.codecool.Handlers;
 
 import com.codecool.DAO.ArtifactDAO;
 import com.codecool.DAO.StudentDAO;
-import com.codecool.Model.Artifact;
-import com.codecool.Model.ShopObject;
-import com.codecool.Model.Student;
+import com.codecool.Helper.QSHelper;
+import com.codecool.Model.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.jtwig.JtwigModel;
@@ -22,20 +21,37 @@ public class StudentHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-//        String sessionCookie = httpExchange.getRequestHeaders().getFirst("Cookie");
-//            TODO : IMPLEMENT SESSION CONTROLLER
-        Integer activeUserId = 19;
-        Student activeAccount = getActiveAccount(activeUserId);
+        String response = "";
+        Session session = Session.getInstance();
+        HttpCookie cookie = session.setCookieInHandler(httpExchange);
+
+
+        StudentDAO dao = new StudentDAO();
+        Integer userId = session.getUserIdBySesssion(cookie);
+        Student activeAccount;
+
+        try {
+            activeAccount = dao.getStudentById(userId);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            activeAccount = null;
+        }
 
         final String GET_METHOD = "GET";
         final String POST_METHOD = "POST";
 
         String method = httpExchange.getRequestMethod();
 
-        if (method.equals(GET_METHOD)) {
-            sendPersonalizedPage(httpExchange, activeAccount);
+        if (method.equals("GET") && session.isValid(cookie.getValue())) {
+            if (activeAccount != null) {
+                sendPersonalizedPage(httpExchange, activeAccount);
+            } else if (activeAccount == null) {
+                QSHelper.redirect(httpExchange, "/login");
+            }
         }
-
+        
         if (method.equals(POST_METHOD)) {
             InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
