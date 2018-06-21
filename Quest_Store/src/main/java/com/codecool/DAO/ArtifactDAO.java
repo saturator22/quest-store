@@ -95,6 +95,7 @@ public class ArtifactDAO {
         artifact.setPrice(resultSet.getInt("artifact_value"));
         artifact.setCategory(resultSet.getString("artifact_category"));
         artifact.setUniqueId(resultSet.getInt("unique_id"));
+        artifact.setStatus(resultSet.getInt("is_used"));
         return artifact;
     }
 
@@ -123,7 +124,7 @@ public class ArtifactDAO {
     public List<Artifact> getStudentArtifacts(Integer userId) {
         List<Artifact> studentArtifacts = new ArrayList<>();
 
-        String query = "SELECT artifacts.*, students_artifacts.user_id, students_artifacts.unique_id " +
+        String query = "SELECT artifacts.*, students_artifacts.user_id, students_artifacts.unique_id, students_artifacts.is_used " +
                 "FROM artifacts JOIN students_artifacts " +
                 "ON students_artifacts.artifact_id = artifacts.artifact_id " +
                 "WHERE students_artifacts.user_id = " + userId;
