@@ -2,6 +2,7 @@ package com.codecool.Handlers;
 
 import com.codecool.DAO.MentorDAO;
 import com.codecool.DAO.StudentDAO;
+import com.codecool.Helper.QSHelper;
 import com.codecool.Model.ClassRoom;
 import com.codecool.Model.Mentor;
 import com.codecool.Model.Session;
@@ -31,10 +32,10 @@ public class MentorHandler implements HttpHandler {
 
         Session session = Session.getInstance();
         HttpCookie cookie = session.setCookieInHandler(httpExchange);
+        Integer mentorId = session.getUserIdBySesssion(cookie);
+        Mentor mentor;
 
         MentorDAO mentorDAO = new MentorDAO();
-        Mentor mentor = mentorDAO.getMentorById(session.getUserIdBySesssion(cookie));
-        List<ClassRoom> classRooms = mentorDAO.getMentorsClasses(mentor);
 
         final String DASHBOARD = "/mentor";
         final String CLASSES = "/mentor/classes";
@@ -44,25 +45,39 @@ public class MentorHandler implements HttpHandler {
 
         // Send a form if it wasn't submitted yet.
 
-        if(method.equals("GET")){
+        try {
+            mentor = mentorDAO.getMentorById(session.getUserIdBySesssion(cookie));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            mentor = null;
+        }
+        List<ClassRoom> classRooms = mentorDAO.getMentorsClasses(mentor);
 
-            if(decodedURI.equals(ADD)) {
-                response = getAddLayout(lastDirectory);
-            }
-            else {
-                switch (requestURI) {
-                    case DASHBOARD:
-                        response = getDashboardLayout();
-                        break;
-                    case CLASSES:
-                        response = getClassesLayout(classRooms);
-                        break;
+        if(method.equals("GET") && session.isValid(cookie.getValue())){
+            if(mentor != null) {
+                if(decodedURI.equals(ADD)) {
+                    response = getAddLayout(lastDirectory);
                 }
+                else {
+                    switch (requestURI) {
+                        case DASHBOARD:
+                            response = getDashboardLayout();
+                            break;
+                        case CLASSES:
+                            response = getClassesLayout(classRooms);
+                            break;
+                    }
+                }
+            } else {
+                QSHelper.redirect(httpExchange, "/login");
             }
         }
 
+        if (method.equals("GET") && !session.isValid(cookie.getValue())) {
+            QSHelper.redirect(httpExchange, "/login");
+        }
         // If the form was submitted, retrieve it's content.
-        if(method.equals("POST")){
+        if(method.equals("POST") && session.isValid(cookie.getValue())){
 
             InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
@@ -83,11 +98,18 @@ public class MentorHandler implements HttpHandler {
             student.setPassword(inputs.get("Password").toString());
             student.setClassId(getClassId(classRooms, inputs.get("Class").toString()));
 
+            System.out.println(student);
+
             studentDAO.insertStudentData(student);
 
             response = getAddLayout(lastDirectory);
         }
 
+
+        if (method.equals("POST") && !session.isValid(cookie.getValue())) {
+            httpExchange.sendResponseHeaders(200, response.length());
+            QSHelper.redirect(httpExchange, "/login");
+        }
         httpExchange.sendResponseHeaders(200, response.length());
         OutputStream os = httpExchange.getResponseBody();
         os.write(response.getBytes());
