@@ -39,6 +39,7 @@ public abstract class UserDAO implements DAO{
             preparedStatement.setString(4, user.getLogin());
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setInt(7, user.getUserId());
 
             int executeResult = preparedStatement.executeUpdate();
             System.out.println(executeResult);
