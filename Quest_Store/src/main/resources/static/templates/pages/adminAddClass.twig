@@ -1,0 +1,35 @@
+{% extends "../layouts/mentorAdminLayout.twig" %} {% block head %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/login.css" media="screen"> -->
+{% endblock %} {% block content %}
+<header class="navigationbar">
+    <nav>
+        <a style="text-align: left" href="/">HOME</a>
+        <h1>Quest Store</h1>
+        <a href="/user" style="margin-rigth: 10px;">Account</a>
+        <form name="submitForm" method="POST" action="/login">
+            <input type="hidden" name="param1" value="param1Value">
+            <a class="nav" href="javascript:document.submitForm.submit()">Sign out</a>
+        </form>
+    </nav>
+</header>
+<div id="addbutton" class="addbutton animate">
+    <button onclick="createClassForm()" id="addstudent">Add class</button>
+</div>
+<div id="studentsform">
+    <form id="form_tag" name="form" action="/admin/class" method="POST">
+        <div id="form">
+        </div>
+        <div id="add"></div>
+    </form>
+    <div class="studentscontainer animate">
+        {% for class in classes %}
+        <div class="studentsbox">
+            <a href="#">{{ class.name.value }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+<footer></footer>
+<script src="/static/js/classform.js"></script>
+{% endblock %}

@@ -7,6 +7,10 @@ footer {
     display: none !important;
 }
 
+nav>form>a, nav>a {
+    padding: 15px;
+}
+
 .contentbox {
     margin-top: 0 !important;
 }

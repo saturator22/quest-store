@@ -4,6 +4,12 @@ public class ClassRoom {
     private Integer classId;
     private String name;
 
+    public ClassRoom(String name) {
+        this.name = name;
+    }
+
+    public ClassRoom() {}
+
     public void setClassId(Integer classId) {
         this.classId = classId;
     }
