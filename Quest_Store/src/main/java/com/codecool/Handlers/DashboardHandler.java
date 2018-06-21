@@ -21,9 +21,21 @@ public class DashboardHandler implements HttpHandler {
 
         LoginDAO dao = new LoginDAO();
         Integer userId = session.getUserIdBySesssion(cookie);
-        System.out.println(userId);
-        LoginData user = null;
-        user = dao.getLoginData(userId);
+        LoginData user;
+
+        try {
+            user = dao.getLoginData(userId);
+        } catch (Exception e) {
+            user = null;
+            System.out.println(e.getMessage());
+        }
+
+        if (user == null && method.equals("GET") && !session.isValid(cookie.getValue())) {
+            String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
+            String whereTo = "/login";
+            exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
+            exchange.sendResponseHeaders(301, -1);
+        }
 
         if (method.equals("GET") && session.isValid(cookie.getValue())) {
             String whereTo = "";
@@ -45,14 +57,6 @@ public class DashboardHandler implements HttpHandler {
             exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
             exchange.sendResponseHeaders(301, -1);
         }
-        if (method.equals("GET") && !session.isValid(cookie.getValue())) {
-
-            String hostPort = exchange.getRequestHeaders().get("HOST").get(0);
-            String whereTo = "/login";
-            exchange.getResponseHeaders().set("Location", "http://" + hostPort + whereTo);
-            exchange.sendResponseHeaders(301, -1);
-        }
-
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
         os.close();

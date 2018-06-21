@@ -21,8 +21,8 @@ public class LoginDAO {
 
             if(resultSet.next()) {
                 loginData = new LoginData(
-                        resultSet.getInt("role_id"),
                         resultSet.getInt("user_id"),
+                        resultSet.getInt("role_id"),
                         resultSet.getString("login"),
                         resultSet.getString("password")
                 );
@@ -52,8 +52,8 @@ public class LoginDAO {
 
             if(resultSet.next()) {
                 loginData = new LoginData(
-                        resultSet.getInt("role_id"),
                         resultSet.getInt("user_id"),
+                        resultSet.getInt("role_id"),
                         resultSet.getString("login"),
                         resultSet.getString("password")
                 );
