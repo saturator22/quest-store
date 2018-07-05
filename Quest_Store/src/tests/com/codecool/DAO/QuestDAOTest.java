@@ -53,7 +53,7 @@ class QuestDAOTest {
 
         List<Quest> matchingQuests;
         matchingQuests = questDAO.getAvailableQuests().stream()
-                .filter(q -> q.getQuestName("Quest to edit"))
+                .filter(q -> q.getQuestName().equals("Quest to edit"))
                 .collect(Collectors.toList());
 
         questToEdit = matchingQuests.get(0);
@@ -62,7 +62,7 @@ class QuestDAOTest {
         questDAO.updateQuest(questToEdit);
 
         Quest editedQuest = questDAO.getAvailableQuests().stream()
-                .filter(q -> q.getQuestName("Edited quest name"))
+                .filter(q -> q.getQuestName().equals("Edited quest name"))
                 .collect(Collectors.toList())
                 .get(0);
 
