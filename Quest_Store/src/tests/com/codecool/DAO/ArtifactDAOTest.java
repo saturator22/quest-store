@@ -1,24 +1,15 @@
 package com.codecool.DAO;
 
 import com.codecool.Model.Artifact;
-import com.codecool.Model.ShopObject;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.Assertions.*;
-import org.mockito.Mock;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ArtifactDAOTest {
-
-
     @AfterEach
     public void cleanUp() {
         ArtifactDAO artifactDAO = new ArtifactDAO();
@@ -29,27 +20,25 @@ public class ArtifactDAOTest {
     @DisplayName("Test add artifact")
     @Test
     public void addArtifactTest() {
-
         Artifact artifact = createArtifact();
         ArtifactDAO artifactDAO = new ArtifactDAO();
 
         int artifactsBefore = artifactDAO.getAvailableArtifacts().size();
         artifactDAO.addArtifact(artifact);
-        List<Artifact> artifacts = artifactDAO.getAvailableArtifacts();
-
         int artifactsAfter = artifactDAO.getAvailableArtifacts().size();
-        artifacts.stream().filter(c -> c.getName().equals("Test name"))
-                          .filter(c -> c.getDescription().equals("Test description"))
-                          .filter(c -> c.getPrice().equals(100));
 
+        List<Artifact> artifacts = artifactDAO.getAvailableArtifacts().stream()
+                .filter(c -> (c.getName().equals("Test name")
+                    && c.getDescription().equals("Test description")
+                    && c.getPrice() == 100))
+                .collect(Collectors.toList());
 
         assertAll(() -> {
-            assertEquals((int) artifacts.get(0).getPrice(), 100);
+            assertEquals(artifacts.get(0).getPrice(), Integer.valueOf(100));
             assertEquals(artifacts.get(0).getName(), "Test name");
             assertEquals(artifacts.get(0).getDescription(), "Test description");
             assertEquals(artifactsBefore + 1, artifactsAfter);
         });
-
     }
 
     @DisplayName("Test edit artifact")
@@ -72,12 +61,10 @@ public class ArtifactDAOTest {
         artifactDAO.updateArtifact(updateArtifact);
 
         assertAll(() -> {
-            assertEquals((int) artifacts.get(0).getPrice(), 200);
+            assertEquals(artifacts.get(0).getPrice(), Integer.valueOf(200));
             assertEquals(artifacts.get(0).getName(), "Updated name");
             assertEquals(artifacts.get(0).getDescription(), "Updated description");
         });
-
-
     }
 
     private Artifact createArtifact() {
@@ -88,5 +75,4 @@ public class ArtifactDAOTest {
 
         return artifact;
     }
-
 }
