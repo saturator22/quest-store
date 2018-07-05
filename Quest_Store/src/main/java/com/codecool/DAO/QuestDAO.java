@@ -107,7 +107,8 @@ public class QuestDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, quest.getQuestCategory());
             ps.setString(2, quest.getQuestName());
-            ps.setInt(3, quest.getQuestReward());
+            ps.setString(3, quest.getQuestDescription());
+            ps.setInt(4, quest.getQuestReward());
 
             int i = ps.executeUpdate();
 
@@ -125,7 +126,8 @@ public class QuestDAO {
     }
 
     public boolean addQuest(Quest quest) {
-        String query = "INSERT INTO quests(quest_category, quest_name, quest_value) VALUES (?, ?, ?)";
+        String query = "INSERT INTO quests(quest_category, quest_name, quest_description, quest_reward)" +
+                " VALUES (?,?,?,?)";
 
         return sendQuestQuery(query, quest);
     }
