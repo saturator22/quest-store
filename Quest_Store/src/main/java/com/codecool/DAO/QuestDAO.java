@@ -12,8 +12,8 @@ import java.util.Set;
 
 public class QuestDAO {
 
-    public Set<ShopObject> getAvailableQuests() {
-        Set<ShopObject> allQuests = new HashSet<>();
+    public List<Quest> getAvailableQuests() {
+        List<Quest> allQuests = new ArrayList<>();
         String query = "SELECT * FROM quests";
 
         try {
@@ -94,7 +94,7 @@ public class QuestDAO {
         quest.setQuestId(resultSet.getInt("quest_id"));
         quest.setQuestDescription(resultSet.getString("quest_description"));
         quest.setQuestName(resultSet.getString("quest_name"));
-        quest.setQuestReward(resultSet.getInt("quest_value"));
+        quest.setQuestReward(resultSet.getInt("quest_reward"));
         quest.setQuestCategory(resultSet.getString("quest_category"));
 //        quest.setQuestOwnerId(resultSet.getInt("user_id"));
 
@@ -133,8 +133,8 @@ public class QuestDAO {
     }
 
     public boolean updateQuest(Quest quest) {
-        String query = "UPDATE quests SET quest_category=?, quest_name=?, quest_value=? " +
-                "WHERE user_id=" + quest.getQuestId();
+        String query = "UPDATE quests SET quest_category=?, quest_name=?, quest_description=?, quest_reward=? " +
+                "WHERE quest_id=" + quest.getQuestId();
 
         return sendQuestQuery(query, quest);
     }
