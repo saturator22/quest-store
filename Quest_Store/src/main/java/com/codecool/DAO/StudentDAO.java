@@ -233,4 +233,36 @@ public class StudentDAO extends UserDAO{
         }
         return false;
     }
+
+    public boolean removeStudent(Student student) {
+        String
+                deleteQuery =
+                "BEGIN;" +
+                "DELETE FROM users WHERE login=?;" +
+                "DELETE FROM students WHERE user_id=(SELECT user_id FROM users WHERE login = ?);" +
+                "COMMIT;";
+        try {
+            Connection connection = ConnectionBuilder.getConnection();
+            String login = student.getLogin();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
+
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, login);
+
+            int deleteResult = preparedStatement.executeUpdate();
+
+            if(deleteResult == 1) {
+                return true;
+            }
+
+            preparedStatement.close();
+            connection.close();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
