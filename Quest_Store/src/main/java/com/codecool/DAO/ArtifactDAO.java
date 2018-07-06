@@ -75,6 +75,12 @@ public class ArtifactDAO {
         return sendQuestQuery(artifact, query);
     }
 
+    public void deleteArtifact(Artifact artifact) {
+        String query = "DELETE from artifacts WHERE name = ? AND price = ? AND description = ?";
+
+        sendQuestQuery(artifact, query);
+    }
+
     private Artifact extractArtifact(ResultSet resultSet) throws SQLException {
         Artifact artifact = new Artifact();
 
