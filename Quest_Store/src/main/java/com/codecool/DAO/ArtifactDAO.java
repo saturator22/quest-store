@@ -14,8 +14,8 @@ import java.util.Set;
 
 public class ArtifactDAO {
 
-    public Set<ShopObject> getAvailableArtifacts() {
-        Set<ShopObject> allQuests = new HashSet<>();
+    public List<Artifact> getAvailableArtifacts() {
+        List<Artifact> allQuests = new ArrayList<>();
         String query = "SELECT * FROM artifacts";
 
         try {
@@ -63,26 +63,31 @@ public class ArtifactDAO {
     }
 
     public boolean updateArtifact(Artifact artifact) {
-        String query = "UPDATE artifacts SET artifact_name=?, artifact_value=?, artifact_description=? " +
+        String query = "UPDATE artifacts SET name=?, price=?, description=? " +
                 "WHERE artifact_id=" + artifact.getArtifactId();
 
         return sendQuestQuery(artifact, query);
     }
 
     public boolean addArtifact(Artifact artifact) {
-        String query = "INSERT INTO artifacts(artifact_name, artifact_value, artifact_description) VALUES (?, ?, ?)";
+        String query = "INSERT INTO artifacts(name, price, description) VALUES (?, ?, ?)";
 
         return sendQuestQuery(artifact, query);
+    }
+
+    public void deleteArtifact(Artifact artifact) {
+        String query = "DELETE from artifacts WHERE name = ? AND price = ? AND description = ?";
+
+        sendQuestQuery(artifact, query);
     }
 
     private Artifact extractArtifact(ResultSet resultSet) throws SQLException {
         Artifact artifact = new Artifact();
 
         artifact.setArtifactId(resultSet.getInt("artifact_id"));
-        artifact.setDescription(resultSet.getString("artifact_description"));
-        artifact.setName(resultSet.getString("artifact_name"));
-        artifact.setPrice(resultSet.getInt("artifact_value"));
-        artifact.setCategory(resultSet.getString("artifact_category"));
+        artifact.setDescription(resultSet.getString("description"));
+        artifact.setName(resultSet.getString("name"));
+        artifact.setPrice(resultSet.getInt("price"));
         return artifact;
     }
 
@@ -90,10 +95,9 @@ public class ArtifactDAO {
         OwnedArtifact artifact = new OwnedArtifact();
 
         artifact.setArtifactId(resultSet.getInt("artifact_id"));
-        artifact.setDescription(resultSet.getString("artifact_description"));
-        artifact.setName(resultSet.getString("artifact_name"));
-        artifact.setPrice(resultSet.getInt("artifact_value"));
-        artifact.setCategory(resultSet.getString("artifact_category"));
+        artifact.setDescription(resultSet.getString("description"));
+        artifact.setName(resultSet.getString("name"));
+        artifact.setPrice(resultSet.getInt("price"));
         artifact.setUniqueId(resultSet.getInt("unique_id"));
         artifact.setStatus(resultSet.getInt("is_used"));
         return artifact;
